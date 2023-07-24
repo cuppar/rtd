@@ -42,13 +42,65 @@ impl Item {
     }
 
     pub fn show(&self) -> String {
-        format!(
-            "{:3} {} {} {:?}",
-            self.id,
-            if self.completed { "ok" } else { "todo" },
-            self.name,
-            NaiveDateTime::from_timestamp_opt(self.created_at.unwrap(), 0).unwrap(),
-        )
+        let created_at = if let Some(time_stamp) = self.created_at {
+            if let Some(utc) = NaiveDateTime::from_timestamp_opt(time_stamp, 0) {
+                Local.from_utc_datetime(&utc).to_string()
+            } else {
+                String::new()
+            }
+        } else {
+            String::new()
+        };
+
+        let completed_at = if let Some(time_stamp) = self.completed_at {
+            if let Some(utc) = NaiveDateTime::from_timestamp_opt(time_stamp, 0) {
+                Local.from_utc_datetime(&utc).to_string()
+            } else {
+                String::new()
+            }
+        } else {
+            String::new()
+        };
+
+        let deleted_at = if let Some(time_stamp) = self.deleted_at {
+            if let Some(utc) = NaiveDateTime::from_timestamp_opt(time_stamp, 0) {
+                Local.from_utc_datetime(&utc).to_string()
+            } else {
+                String::new()
+            }
+        } else {
+            String::new()
+        };
+
+        let mut result = if self.deleted {
+            format!(
+                "{:3} {} [deleted] {}\n",
+                self.id,
+                if self.completed { "ok" } else { "todo" },
+                self.name,
+            )
+        } else {
+            format!(
+                "{:3} {} {}\n",
+                self.id,
+                if self.completed { "ok" } else { "todo" },
+                self.name,
+            )
+        };
+
+        if !created_at.is_empty() {
+            result += &format!("\tcreated at: {}", created_at);
+        }
+        if !completed_at.is_empty() {
+            result += &format!("\tcompleted at: {}", completed_at);
+        }
+        if !deleted_at.is_empty() {
+            result += &format!("\tdeleted at: {}", deleted_at);
+        }
+
+        result += "\n";
+
+        result
     }
 }
 
