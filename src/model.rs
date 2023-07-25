@@ -12,7 +12,7 @@ const ITEM_COUNT: usize = 7;
 #[derive(Debug, Clone)]
 pub struct Item {
     pub(crate) id: u32,
-    pub name: String,
+    pub(crate) name: String,
     pub(crate) completed: bool,
     pub(crate) deleted: bool,
     pub(crate) created_at: Option<i64>,
