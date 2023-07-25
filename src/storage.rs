@@ -3,7 +3,7 @@ use std::error::Error;
 use std::fmt::Display;
 use std::fs::File;
 use std::fs::{self, OpenOptions};
-use std::io::{Read, Write};
+use std::io::{BufReader, BufWriter, Read, Seek, Write};
 use std::path::Path;
 
 use crate::model;
@@ -12,7 +12,9 @@ use super::model::*;
 
 pub fn add_item(item: Item) -> Result<()> {
     let mut csv = Csv::new()?;
+    csv.file.seek(std::io::SeekFrom::End(0))?;
     writeln!(csv.file, "{}", item.to_string())?;
+
     Ok(())
 }
 
@@ -30,7 +32,13 @@ pub fn get_all() -> Result<Vec<Item>> {
 }
 
 pub fn get_max_id() -> Result<u32> {
-    Ok(1)
+    let items = get_all()?;
+    let max_id = items.iter().map(|item| item.id()).reduce(u32::max);
+    if let Some(max_id) = max_id {
+        Ok(max_id)
+    } else {
+        Ok(0)
+    }
 }
 
 #[allow(unused)]
@@ -59,7 +67,11 @@ impl Csv {
     }
 
     fn create(path: &Path) -> Result<fs::File> {
-        let csv = OpenOptions::new().write(true).create(true).open(path)?;
+        let csv = OpenOptions::new()
+            .read(true)
+            .write(true)
+            .create(true)
+            .open(path)?;
         Ok(csv)
     }
 
@@ -67,7 +79,7 @@ impl Csv {
         let csv = OpenOptions::new()
             .read(true)
             .write(true)
-            .append(true)
+            // .append(true)
             .open(path)?;
         Ok(csv)
     }
@@ -75,6 +87,22 @@ impl Csv {
         let home = env::var("HOME")?;
         let filename = home + "/" + CSV_FILE_NAME;
         Ok(filename)
+    }
+
+    pub fn splice(&mut self, offset: u64, delete_size: u64, write_content: &str) -> Result<()> {
+        use std::io::SeekFrom;
+        let file = &self.file;
+        let mut reader = BufReader::new(file);
+        reader.seek(SeekFrom::Start(offset + delete_size))?;
+        let mut rest_content = String::new();
+        reader.read_to_string(&mut rest_content)?;
+
+        let write_content = write_content.to_owned() + &rest_content;
+        let mut writer = BufWriter::new(file);
+        writer.seek(SeekFrom::Start(offset))?;
+        writer.write_all(write_content.as_bytes())?;
+
+        Ok(())
     }
 }
 

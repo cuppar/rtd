@@ -41,6 +41,10 @@ impl Item {
         }
     }
 
+    pub fn id(&self) -> u32 {
+        self.id
+    }
+
     pub fn show(&self) -> String {
         let created_at = if let Some(time_stamp) = self.created_at {
             if let Some(utc) = NaiveDateTime::from_timestamp_opt(time_stamp, 0) {
@@ -74,28 +78,36 @@ impl Item {
 
         let mut result = if self.deleted {
             format!(
-                "{:3} {} [deleted] {}\n",
+                "{:3} {} \u{1f6ae} {}\n",
                 self.id,
-                if self.completed { "ok" } else { "todo" },
+                if self.completed {
+                    "\u{2705}"
+                } else {
+                    "\u{1f532}"
+                },
                 self.name,
             )
         } else {
             format!(
                 "{:3} {} {}\n",
                 self.id,
-                if self.completed { "ok" } else { "todo" },
+                if self.completed {
+                    "\u{2705}"
+                } else {
+                    "\u{1f532}"
+                },
                 self.name,
             )
         };
 
         if !created_at.is_empty() {
-            result += &format!("\tcreated at: {}", created_at);
+            result += &format!("\tcreated at: {}\n", created_at);
         }
         if !completed_at.is_empty() {
-            result += &format!("\tcompleted at: {}", completed_at);
+            result += &format!("\tcompleted at: {}\n", completed_at);
         }
         if !deleted_at.is_empty() {
-            result += &format!("\tdeleted at: {}", deleted_at);
+            result += &format!("\tdeleted at: {}\n", deleted_at);
         }
 
         result += "\n";
