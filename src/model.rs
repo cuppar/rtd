@@ -11,13 +11,13 @@ const ITEM_COUNT: usize = 7;
 
 #[derive(Debug)]
 pub struct Item {
-    id: u32,
-    name: String,
-    completed: bool,
-    deleted: bool,
-    created_at: Option<i64>,
-    completed_at: Option<i64>,
-    deleted_at: Option<i64>,
+    pub id: u32,
+    pub name: String,
+    pub completed: bool,
+    pub deleted: bool,
+    pub created_at: Option<i64>,
+    pub completed_at: Option<i64>,
+    pub deleted_at: Option<i64>,
 }
 
 impl Item {
@@ -133,9 +133,11 @@ impl ToString for Item {
             deleted_at = x.to_string();
         }
 
+        let name = self.name.replace(',', "$");
+
         format!(
             "{},{},{},{},{},{},{}",
-            self.id, self.name, self.completed, self.deleted, created_at, completed_at, deleted_at,
+            self.id, name, self.completed, self.deleted, created_at, completed_at, deleted_at,
         )
     }
 }
@@ -148,7 +150,7 @@ impl FromStr for Item {
             return Err(ItemError::ParseErr("item lack".to_string()));
         }
         let id = splited[0].parse::<u32>()?;
-        let name = splited[1];
+        let name = &splited[1].replace('$', ",");
         let completed = splited[2].parse::<bool>()?;
         let deleted = splited[3].parse::<bool>()?;
 

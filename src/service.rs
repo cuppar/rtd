@@ -4,7 +4,7 @@ use chrono::Local;
 
 use crate::{
     model::Item,
-    storage::{self, get_max_id, StorageError},
+    storage::{self, get_item_by_id, get_max_id, update_item, StorageError},
 };
 
 pub fn add_item(name: &str) -> Result<()> {
@@ -22,8 +22,26 @@ pub fn add_item(name: &str) -> Result<()> {
     Ok(())
 }
 
+pub fn destory_item(id: u32) -> Result<()> {
+    storage::delete_item(id)?;
+    Ok(())
+}
+
+pub fn delete_item(id: u32) -> Result<()> {
+    let item = get_item_by_id(id)?;
+    update_item(Item {
+        deleted: true,
+        ..item
+    })?;
+    Ok(())
+}
+
 pub fn list_all() -> Result<()> {
     let items = storage::get_all()?;
+    if items.is_empty() {
+        println!("Nothing need to do.");
+        return Ok(());
+    }
     for item in items.into_iter() {
         println!("{}", item.show());
     }
