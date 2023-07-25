@@ -21,9 +21,12 @@
 - list all deleted item
     - cmd: rtd -l deleted(--list deleted)
     - list all deleted items
-- real delete
-    - cmd: rtd --real-delete
-    - real delete all mark to deleted item
+- destroy
+    - cmd: rtd --desroty <item-id>
+    - destroy a item
+- destroy deleted
+    - cmd: rtd --destroy-deleted
+    - destroy all deleted item
 - clear
     - cmd: rtd --clear
     - clear all items, make list empty

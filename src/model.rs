@@ -9,15 +9,15 @@ use chrono::*;
 
 const ITEM_COUNT: usize = 7;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Item {
-    pub id: u32,
+    pub(crate) id: u32,
     pub name: String,
-    pub completed: bool,
-    pub deleted: bool,
-    pub created_at: Option<i64>,
-    pub completed_at: Option<i64>,
-    pub deleted_at: Option<i64>,
+    pub(crate) completed: bool,
+    pub(crate) deleted: bool,
+    pub(crate) created_at: Option<i64>,
+    pub(crate) completed_at: Option<i64>,
+    pub(crate) deleted_at: Option<i64>,
 }
 
 impl Item {
@@ -78,7 +78,7 @@ impl Item {
 
         let mut result = if self.deleted {
             format!(
-                "{:3} {} \u{1f6ae} {}\n",
+                "{:3} {} \u{1f6ae} {}\n\n",
                 self.id,
                 if self.completed {
                     "\u{2705}"
@@ -89,7 +89,7 @@ impl Item {
             )
         } else {
             format!(
-                "{:3} {} {}\n",
+                "{:3} {} {}\n\n",
                 self.id,
                 if self.completed {
                     "\u{2705}"
@@ -109,8 +109,6 @@ impl Item {
         if !deleted_at.is_empty() {
             result += &format!("\tdeleted at: {}\n", deleted_at);
         }
-
-        result += "\n";
 
         result
     }
@@ -133,7 +131,10 @@ impl ToString for Item {
             deleted_at = x.to_string();
         }
 
-        let name = self.name.replace(',', "$");
+        let name = self
+            .name
+            .replace(',', COMMA_FAKE)
+            .replace('\n', NEWLINE_FAKE);
 
         format!(
             "{},{},{},{},{},{},{}",
@@ -150,7 +151,9 @@ impl FromStr for Item {
             return Err(ItemError::ParseErr("item lack".to_string()));
         }
         let id = splited[0].parse::<u32>()?;
-        let name = &splited[1].replace('$', ",");
+        let name = &splited[1]
+            .replace(COMMA_FAKE, ",")
+            .replace(NEWLINE_FAKE, "\n");
         let completed = splited[2].parse::<bool>()?;
         let deleted = splited[3].parse::<bool>()?;
 
@@ -214,3 +217,6 @@ impl From<ParseBoolError> for ItemError {
         Self::ParseErr(value.to_string())
     }
 }
+
+const COMMA_FAKE: &str = "<@^_fake_comma_$#>";
+const NEWLINE_FAKE: &str = "<@^_fake_newline_$#>";
