@@ -134,7 +134,7 @@ impl ToString for Item {
         let name = self
             .name
             .replace(',', COMMA_FAKE)
-            .replace('\n', NEWLINE_FAKE);
+            .replace(r"\n", NEWLINE_FAKE);
 
         format!(
             "{},{},{},{},{},{},{}",

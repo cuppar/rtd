@@ -91,11 +91,21 @@ pub fn delete_item(id: u32) -> Result<()> {
     Ok(())
 }
 
+pub fn restore_item(id: u32) -> Result<()> {
+    let item = get_item_by_id(id)?;
+    update_item(Item {
+        deleted: false,
+        deleted_at: None,
+        ..item.clone()
+    })?;
+    println!("Restored [{}]: {}\n", item.id, item.name);
+    Ok(())
+}
 
 pub fn list_uncompleted() -> Result<()> {
     let items = storage::get_all()?
         .into_iter()
-        .filter(|item| !item.completed)
+        .filter(|item| !item.deleted && !item.completed)
         .collect::<Vec<_>>();
     if items.is_empty() {
         println!("Nothing need to do.");
@@ -111,7 +121,7 @@ pub fn list_uncompleted() -> Result<()> {
 pub fn list_completed() -> Result<()> {
     let items = storage::get_all()?
         .into_iter()
-        .filter(|item| item.completed)
+        .filter(|item| !item.deleted && item.completed)
         .collect::<Vec<_>>();
     if items.is_empty() {
         println!("Nothing completed.");
