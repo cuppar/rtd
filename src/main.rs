@@ -7,7 +7,7 @@ use rtd_tutorial::*;
 #[derive(Parser, Debug)]
 #[command(
     author = "Cuppar He <cuppar.hzy@gmail.com>",
-    version = "1.0",
+    version = "0.1.0",
     long_about = "A simple todo app write by Rust.\nYou can use it to make life pleasant or use it to learn the Rust language!\nLearn Rust in 500 lines of code tutorial: https://github.com/cuppar/rtd"
 )]
 struct Args {
