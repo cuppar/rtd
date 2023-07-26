@@ -13,7 +13,7 @@
     - cmd: rtd -r(--restore) <item-id>
     - restore a deleted marked item
 - destroy
-    - cmd: rtd --desroty <item-id>
+    - cmd: rtd --destroy <item-id>
     - destroy a item
 - destroy deleted
     - cmd: rtd --destroy-deleted
