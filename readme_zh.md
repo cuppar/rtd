@@ -1,5 +1,5 @@
 # 500行代码学会Rust
-[English](https://github.com/cuppar/rtd) | 中文
+[English](https://github.com/cuppar/rtd#learn-rust-by-500-lines-code) | 中文
 
 - `RTD` (Rust To Do) 是一个用500行Rust 代码编写的todo app命令行应用。（不包括空行/注释/长行折断显示/测试代码）
 - `RTD` 同时也是一个[教程(TODO)]()，旨在通过实践学习Rust。
