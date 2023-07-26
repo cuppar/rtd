@@ -6,14 +6,14 @@ English | [中文](https://github.com/cuppar/rtd/blob/master/readme_zh.md)
 
 ## Table of contents
 
-- [What's can you learn from rtd?](#whats-can-you-learn-from-rtd)
+- [What can you learn from rtd?](#what-can-you-learn-from-rtd)
 - [Prepare](#prepare)
 - [Install](#install)
 - [Usage](#usage)
 
 ---
 
-## What's can you learn from RTD?
+## What can you learn from RTD?
 
 #### Through the [Learn Rust by 500 lines code(TODO)]() tutorial, step by step to build the project from scratch, you will learn:
   - Rust common syntax
