@@ -183,4 +183,4 @@ rtd --clear
 
 ## 关于作者
 
-何志颖(Cuppar He), 软件开发工程师, 喜欢编程, 学习新东西, 尤其是计算机科学, 曾就职于[SAP](https://www.sap.com/)([世界百强](https://www.rankingthebrands.com/Brand-detail.aspx?brandID=22))和[阿里巴巴集团](https://www.alibabagroup.com/)([世界百强](https://www.rankingthebrands.com/Brand-detail.aspx?brandID=6245)&中国互联网巨头)。目前我在Gap Year, 如果你在寻找软件开发工程师并且能提供优质的offer, 请与我联系`cuppar.hzy@gmail.com`。
+何志颖(Cuppar He), 软件开发工程师, 喜欢编程, 学习新东西, 尤其是计算机科学, 曾就职于[SAP](https://www.sap.com/)([世界百强](https://www.rankingthebrands.com/Brand-detail.aspx?brandID=22))和[阿里巴巴集团](https://www.alibabagroup.com/)([世界百强](https://www.rankingthebrands.com/Brand-detail.aspx?brandID=6245)&中国互联网巨头)。目前我在Gap Year, 如果你在寻找软件开发工程师并且能提供优质的offer(远程和现场都可以), 请与我联系`cuppar.hzy@gmail.com`。
