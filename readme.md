@@ -1,4 +1,4 @@
-# RTD (Rust ToDo cli tool)
+# RTD (Rust ToDo)
 English | [中文](https://github.com/cuppar/rtd/blob/master/readme_zh.md)
 
 RTD是一个500行（不包括空行/注释/长行折断显示）Rust代码的命令行todo应用。
@@ -181,7 +181,7 @@ rtd --clear
 
 #### 架构图
 
-![rtd_arch_zh](Tutorial/doc/img/rtd_arch_zh.png)
+![rtd_arch_zh](Tutorial/doc/img/rtd_arch_zh.svg)
 
 #### 存储
 使用一个本地文件 `$HOME/.rtd.csv` 存储所有数据
