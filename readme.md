@@ -9,7 +9,7 @@ English | [中文](https://github.com/cuppar/rtd/blob/master/readme_zh.md)
 
 ---
 
-## 你能从学到什么？
+## 你能从RTD学到什么？
 
 #### 通过[500行代码学会Rust(TODO)](https://github.com/cuppar/rtd)教程，一步步从零构建该项目，你将学会：
   - Rust常用语法
