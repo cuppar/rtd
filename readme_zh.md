@@ -65,7 +65,7 @@
 cargo install rtd-tutorial
 ```
 
-(PS: 如果遇到网络不稳定的情况，可考虑使用 [crate.io mirror](https://rsproxy.cn/)
+(PS: 如果遇到网络不稳定的情况，可考虑使用 [crates.io mirror](https://rsproxy.cn/)
 
 #### 或者通过 `git repo` :
 ```bash
