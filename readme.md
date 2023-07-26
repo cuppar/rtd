@@ -1,77 +1,77 @@
-# 500行代码学会Rust
-[English (TODO)]()| 中文
+# Learn Rust by 500 lines code
+English | [中文](https://github.com/cuppar/rtd/blob/master/readme_zh.md)
 
-- RTD (Rust ToDo) 是一个用500行（不包括空行/注释/长行折断显示）Rust 代码编写的todo app命令行工具。
-- RTD同时也是一个[教程(TODO)]()，旨在通过实践学习Rust。
-- Learning by doing!
+- RTD (Rust To Do) is a todo app cli tool write by 500 lines Rust code. (exclude space lines/comments/long line break display/test code)
+- RTD is also a [tutorial(TODO)](), designed to learn Rust by doing.
 
-## 目录
+## Table of contents
 
-- [你能从RTD学到什么？](#你能从rtd学到什么)
-- [准备](#准备)
-- [安装](#安装)
-- [使用](#使用)
+- [What's can you learn from rtd?](#whats-can-you-learn-from-rtd)
+- [Prepare](#prepare)
+- [Install](#install)
+- [Usage](#usage)
 
 ---
 
-## 你能从RTD学到什么？
+## What's can you learn from RTD?
 
-#### 通过[500行代码学会Rust(TODO)]()教程，一步步从零构建该项目，你将学会：
-  - Rust常用语法
-  - Rust模块系统(`package`/`binary crate`/`library crate`/`mod`/`pub`/`use`)
-  - Rust所有权模型(伯恩斯坦条件)
-  - Rust错误/空值处理(`Result`/`Option`)
-  - Rust模式匹配(`if let` , `match` ...)
-  - Rust单元测试
-  - Rust文件读写(`File Seek`/`Buffed File I/O`)
-  - Rust操作环境变量
-  - Rust命令行参数解析
-  - Rust发布包至crate.io
-  - 分层抽象(数据存储层/模型映射层/数据模型层/业务逻辑层/应用接口层/用户接口层)
-  - 从零手写序列化/反序列化
-  - 实现回收站功能（虚拟化概念）
+#### Through the [Learn Rust by 500 lines code(TODO)]() tutorial, step by step to build the project from scratch, you will learn:
+  - Rust common syntax
+  - Rust module system (`package`/`binary crate`/`library crate`/`mod`/`pub`/`use`)
+  - Rust ownership model (Bernstein conditions)
+  - Rust error/null handling model (`Result<T, E>`/`Option<T>`)
+  - Rust generic
+  - Rust pattern matching (`if let` , `match` ...)
+  - Rust unit test
+  - Rust file I/O (`File Seek`/`Buffed File I/O`)
+  - Rust manipulating environment variables
+  - Rust command line parameter parsing
+  - Rust release package to crate.io
+  - Layered abstraction (data storage layer/model mapping layer/data model layer/business logic layer/application interface layer/user interface layer)
+  - Handwritten serialization/deserialization from scratch
+  - Implement the recycle bin function (virtualization concept)
 
-###### 架构图
+###### Architecture
 
 ![rtd_arch_zh](Tutorial/doc/img/rtd_arch_zh.svg)
 
-###### 存储
-使用一个本地文件 `$HOME/.rtd.csv` 存储所有数据
+###### Storage
+Use a local file `$HOME/.rtd.csv` store all data
 
 ![data_storage](Tutorial/doc/img/csv.png)
 
-#### 完成该教程或直接安装RTD，你将得到:
-  - 极其轻量级且简洁的todo命令行应用
-  - 跨平台，Rust项目优秀的构建系统天然支持跨平台
-  - 安全，支持回收站，完全本地，不联网，无数据库
-  - 所有数据存储仅使用一个本地csv文件，可以通过复制csv文件来在不同机器间切换
+#### After completing this tutorial or installing RTD directly, you will get:
+  - Extremely lightweight and concise todo command line application
+  - Cross-platform, Rust's excellent build system naturally supports cross-platform
+  - Safe, supports recycle bin, completely local, no network, no database
+  - All data storage uses only one local csv file, which can be switched between different machines by copying the csv file
 
 ---
-如果你喜欢我的教程，别忘了给我点个赞哦～
+If you like my tutorial, don't forget to give me a star~
 ---
 
-## 准备
+## Prepare
 
-- Rust 天然跨平台，本项目在 `linux` 环境构建测试，`Windows`/`MacOS` 同样支持，根据自身操作系统选择下载对应 `Cargo` 即可。
-- `Cargo` Rust 包管理和构建工具, 可通过[官网](https://www.rust-lang.org/tools/install)`rustup`一行命令直接安装，接下来的事情，它会帮你全搞定，很可爱，不是吗？
+- Rust is naturally cross-platform. This project is built and tested in the `linux` environment, and `Windows`/`MacOS` are also supported. You can choose to download the corresponding `Cargo` according to your own operating system.
+- `Cargo` Rust's package management and build tool, can be installed directly through the [Rust official website](https://www.rust-lang.org/tools/install) `rustup` one line command. Then, all things will be done by `Cargo`, so cute, right?
 
-## 安装
+## Install
 
-#### 通过 `crate.io` :
+#### Via `crate.io` :
 
 ```bash
 cargo install rtd-tutorial
 ```
 
-#### 或者通过 `git repo` :
+#### Or via `git repo` :
 ```bash
 git clone https://github.com/cuppar/rtd.git
 cargo install --path rtd
 ```
 
-## 使用
+## Usage
 
-#### 查看帮助说明
+#### view help document
 ```bash
 rtd -h
 rtd --help
@@ -80,7 +80,7 @@ rtd --help
 ![rtd_help_summary](Tutorial/doc/img/rtd_help_summary.png)
 ![rtd_help](Tutorial/doc/img/rtd_help.png)
 
-#### 添加一个todo
+#### add a todo
 ```bash
 rtd -a <item-name>
 rtd --add <item-name>
@@ -88,7 +88,7 @@ rtd --add <item-name>
 
 ![rtd_add](Tutorial/doc/img/rtd_add.png)
 
-#### 列出所有未完成的todo
+#### List all uncompleted todos
 ```bash
 rtd
 rtd -l
@@ -99,7 +99,7 @@ rtd --list uncompleted
 
 ![rtd_list_uncompleted](Tutorial/doc/img/rtd_list_uncompleted.png)
 
-#### 完成一个todo
+#### Complete a todo
 ```bash
 rtd -c <item-id>
 rtd --complete <item-id>
@@ -107,7 +107,7 @@ rtd --complete <item-id>
 
 ![rtd_complete_item](Tutorial/doc/img/rtd_complete_item.png)
 
-#### 列出所有已完成的todo
+#### List all completed todos
 ```bash
 rtd -l completed
 rtd --list completed
@@ -115,7 +115,7 @@ rtd --list completed
 
 ![rtd_list_completed](Tutorial/doc/img/rtd_list_completed.png)
 
-#### 标记一个todo为未完成
+#### uncomplete a todo
 ```bash
 rtd -u <item-id>
 rtd --uncomplete <item-id>
@@ -123,7 +123,7 @@ rtd --uncomplete <item-id>
 
 ![rtd_uncomplete_item](Tutorial/doc/img/rtd_uncomplete_item.png)
 
-#### 把一个todo扔进回收站
+#### Throw a todo into the recycle bin
 ```bash
 rtd -d <item-id>
 rtd --delete <item-id>
@@ -131,7 +131,7 @@ rtd --delete <item-id>
 
 ![rtd_delete_item](Tutorial/doc/img/rtd_delete_item.png)
 
-#### 列出所有回收站的todo
+#### List all recycle bin todos
 ```bash
 rtd -l deleted
 rtd --list deleted
@@ -139,7 +139,7 @@ rtd --list deleted
 
 ![rtd_list_deleted](Tutorial/doc/img/rtd_list_deleted.png)
 
-#### 从回收站恢复一个todo
+#### Restore a todo from the recycle bin
 ```bash
 rtd -r <item-id>
 rtd --restore <item-id>
@@ -147,21 +147,21 @@ rtd --restore <item-id>
 
 ![rtd_restore_item](Tutorial/doc/img/rtd_restore_item.png)
 
-#### 物理销毁一个todo
+#### Physically destroy a todo
 ```bash
 rtd --destroy <item-id>
 ```
 
 ![rtd_destroy_item](Tutorial/doc/img/rtd_destroy_item.png)
 
-#### 清空回收站
+#### Empty recycle bin
 ```bash
 rtd --destroy-deleted
 ```
 
 ![rtd_destroy_deleted](Tutorial/doc/img/rtd_destroy_deleted.png)
 
-#### 列出所有todo
+#### List all todos
 ```bash
 rtd -l all
 rtd --list all
@@ -169,7 +169,7 @@ rtd --list all
 
 ![rtd_list_all](Tutorial/doc/img/rtd_list_all.png)
 
-#### 清空所有todo
+#### Clear all todos
 ```bash
 rtd --clear
 ```

@@ -1,7 +1,7 @@
 # 500行代码学会Rust
 [English](https://github.com/cuppar/rtd)| 中文
 
-- `RTD` (Rust ToDo) 是一个用500行Rust 代码编写的todo app命令行应用。（不包括空行/注释/长行折断显示/测试代码）
+- `RTD` (Rust To Do) 是一个用500行Rust 代码编写的todo app命令行应用。（不包括空行/注释/长行折断显示/测试代码）
 - `RTD` 同时也是一个[教程(TODO)]()，旨在通过实践学习Rust。
 - Learning by doing!
 
@@ -21,7 +21,8 @@
   - Rust模块系统(`package`/`binary crate`/`library crate`/`mod`/`pub`/`use`)
   - Rust所有权模型(伯恩斯坦条件)
   - Rust生命周期(可选)
-  - Rust错误/空值处理(`Result`/`Option`)
+  - Rust错误/空值处理(`Result<T, E>`/`Option<T>`)
+  - Rust泛型
   - Rust模式匹配(`if let` , `match` ...)
   - Rust单元测试
   - Rust文件读写(`File Seek`/`Buffed File I/O`)
@@ -48,13 +49,13 @@
   - 所有数据存储仅使用一个本地csv文件，可以通过复制csv文件来在不同机器间切换
 
 ---
-如果你喜欢我的教程，别忘了给我点个赞哦～
+如果你喜欢我的教程，别忘了给我点个Star哦～
 ---
 
 ## 准备
 
 - Rust 天然跨平台，本项目在 `linux` 环境构建测试，`Windows`/`MacOS` 同样支持，根据自身操作系统选择下载对应 `Cargo` 即可。
-- `Cargo` Rust 包管理和构建工具, 可通过[官网](https://www.rust-lang.org/tools/install)`rustup`一行命令直接安装，接下来的事情，它会帮你全搞定，很可爱，不是吗？
+- `Cargo` Rust 包管理和构建工具, 可通过[Rust官网](https://www.rust-lang.org/tools/install)`rustup`一行命令直接安装，接下来的事情，它会帮你全搞定，很可爱，不是吗？
 
 ## 安装
 
