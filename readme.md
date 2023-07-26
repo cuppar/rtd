@@ -53,8 +53,7 @@ English | [中文](https://github.com/cuppar/rtd/blob/master/readme_zh.md)
 
 ```bash
 git clone https://github.com/cuppar/rtd.git
-cd rtd
-cargo install --path .
+cargo install --path rtd
 ```
 
 ## 使用
