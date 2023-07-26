@@ -11,7 +11,7 @@
 
 ## 你能从RTD学到什么？
 
-#### 通过[500行代码学会Rust(TODO)](https://github.com/cuppar/rtd)教程，一步步从零构建该项目，你将学会：
+#### 通过[500行代码学会Rust(TODO)]()教程，一步步从零构建该项目，你将学会：
   - Rust常用语法
   - Rust模块系统(`package`/`binary crate`/`library crate`/`mod`/`pub`/`use`)
   - Rust所有权模型(伯恩斯坦条件)
