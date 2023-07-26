@@ -33,7 +33,7 @@ English | [中文](https://github.com/cuppar/rtd/blob/master/readme_zh.md)
 
 ###### Architecture
 
-![rtd_arch_zh](Tutorial/doc/img/rtd_arch_zh.svg)
+![rtd_arch](Tutorial/doc/img/rtd_arch.svg)
 
 ###### Storage
 Use a local file `$HOME/.rtd.csv` store all data
