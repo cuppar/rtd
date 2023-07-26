@@ -58,6 +58,15 @@ cargo install --path rtd
 
 ## 使用
 
+#### 查看帮助说明
+```bash
+rtd -h
+rtd --help
+```
+
+![rtd_help_summary](Tutorial/doc/img/rtd_help_summary.png)
+![rtd_help](Tutorial/doc/img/rtd_help.png)
+
 #### 添加一个todo
 ```bash
 rtd -a <item-name>
