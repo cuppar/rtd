@@ -1,10 +1,22 @@
 [package]
-name = "rtd"
+name = "rtd-tutorial"
 version = "0.1.0"
 edition = "2021"
+license = "MIT"
+description = "Learn Rust by 500 lines code, build a Rust ToDo cli tool."
+homepage = "https://github.com/cuppar/rtd"
+documentation = "https://github.com/cuppar/rtd"
+repository = "https://github.com/cuppar/rtd"
+readme = "readme.md"
+keywords = ["tutorial", "learning by doing", "step by step guide", "cli tool"]
+categories = ["command-line-utilities"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 chrono = "0.4.26"
 clap = { version = "4.3.19", features = ["derive"] }
+
+[[bin]]
+name = "rtd"
+path = "src/main.rs"

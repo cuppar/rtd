@@ -1,7 +1,7 @@
 use std::error::Error;
 
 use clap::{Parser, ValueEnum};
-use rtd::*;
+use rtd_tutorial::*;
 
 /// Rust To Do
 #[derive(Parser, Debug)]
