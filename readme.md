@@ -13,15 +13,15 @@ English | [中文](https://github.com/cuppar/rtd/blob/master/readme_zh.md)
 
 #### 通过[500行代码学会Rust(TODO)](https://github.com/cuppar/rtd)教程，一步步从零构建该项目，你将学会：
   - Rust常用语法
-  - Rust模式匹配(`if let` , `match` ...)
   - Rust模块系统(`package`/`binary crate`/`library crate`/`mod`/`pub`/`use`)
+  - Rust所有权模型(伯恩斯坦条件)
+  - Rust错误/空值处理(`Result`/`Option`)
+  - Rust模式匹配(`if let` , `match` ...)
+  - Rust单元测试
+  - Rust文件读写(`File Seek`/`Buffed File I/O`)
+  - Rust操作环境变量
+  - Rust命令行参数解析
   - 分层抽象(数据存储层/模型映射层/数据模型层/业务逻辑层/应用接口层/用户接口层)
-  - 错误/空值处理(`Result`/`Option`)
-  - 所有权
-  - 单元测试
-  - 文件读写(`File Seek`/`Buffed File I/O`)
-  - 操作环境变量
-  - 命令行参数解析
   - 从零手写序列化/反序列化
   - 实现回收站功能（虚拟化概念）
 
