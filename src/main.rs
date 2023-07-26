@@ -3,7 +3,7 @@ use std::error::Error;
 use clap::{Parser, ValueEnum};
 use rtd_tutorial::*;
 
-/// Rust To Do
+/// Rust To Do, tutorial: https://github.com/cuppar/rtd
 #[derive(Parser, Debug)]
 #[command(
     author = "Cuppar He <cuppar.hzy@gmail.com>",

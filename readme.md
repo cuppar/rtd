@@ -57,6 +57,13 @@
 
 ## 安装
 
+#### 通过 `crate.io` :
+
+```bash
+cargo install rtd-tutorial
+```
+
+#### 或者通过 `git repo` :
 ```bash
 git clone https://github.com/cuppar/rtd.git
 cargo install --path rtd
