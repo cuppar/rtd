@@ -20,7 +20,7 @@
   - Rust常用语法
   - Rust模块系统(`package`/`binary crate`/`library crate`/`mod`/`pub`/`use`)
   - Rust所有权模型(伯恩斯坦条件)
-  - Rust生命周期(可选)
+  - Rust生命周期
   - Rust错误/空值处理(`Result<T, E>`/`Option<T>`)
   - Rust泛型
   - Rust模式匹配(`if let` , `match` ...)

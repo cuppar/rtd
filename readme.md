@@ -19,6 +19,7 @@ English | [中文](https://github.com/cuppar/rtd/blob/master/readme_zh.md#500%E8
   - Rust common syntax
   - Rust module system (`package`/`binary crate`/`library crate`/`mod`/`pub`/`use`)
   - Rust ownership model (Bernstein conditions)
+  - Rust lifetime
   - Rust error/null handling model (`Result<T, E>`/`Option<T>`)
   - Rust generic
   - Rust pattern matching (`if let` , `match` ...)
