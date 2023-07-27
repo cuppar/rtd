@@ -1,6 +1,6 @@
 # 500行代码学会Rust
 [![crate_version](https://img.shields.io/crates/v/rtd-tutorial)](https://crates.io/crates/rtd-tutorial)
-[![crate_downloads](https://img.shields.io/crates/d/rtd-tutorial?label=Crate%20Downloads&color=blue)](https://crates.io/crates/rtd-tutorial)
+[![crate_downloads](https://img.shields.io/crates/d/rtd-tutorial?color=blue)](https://crates.io/crates/rtd-tutorial)
 [![license](https://img.shields.io/crates/l/rtd-tutorial?color=red)](https://github.com/cuppar/rtd/blob/master/LICENSE)
 
 [English](https://github.com/cuppar/rtd#learn-rust-by-500-lines-code) | 中文
