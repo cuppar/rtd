@@ -57,6 +57,7 @@ Use a local file `$HOME/.rtd.csv` store all data
   - All data storage uses only one local csv file, which can be switched between different machines by copying the csv file
 
 ---
+Interesting fact: I use RTD to complete the RTD tutorial, :)
 If you like my tutorial, don't forget to give me a star~
 ---
 
