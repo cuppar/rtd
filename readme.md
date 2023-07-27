@@ -16,7 +16,7 @@ English | [中文](https://github.com/cuppar/rtd/blob/master/readme_zh.md#500%E8
 
 ## What can you learn from RTD?
 
-#### Through the [Learn Rust by 500 lines code(TODO)]() tutorial, step by step to build the project from scratch, you will learn:
+#### Assuming you know nothing about Rust, through the [Learn Rust by 500 lines code(TODO)]() tutorial, step by step to build the project from scratch, you will learn:
   - Rust common syntax
   - Rust module system (`package`/`binary crate`/`library crate`/`mod`/`pub`/`use`)
   - Rust ownership model (Bernstein conditions)
