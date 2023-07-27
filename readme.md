@@ -8,6 +8,8 @@ English | [中文](https://github.com/cuppar/rtd/blob/master/readme_zh.md#500%E8
 - RTD (Rust To Do) is a todo app cli tool write by 500 lines Rust code. (exclude space lines/comments/long line break display/test code)
 - RTD is also a [tutorial](https://github.com/cuppar/rtd/wiki), designed to learn Rust by doing.
 
+![rtd_list_all](Tutorial/doc/img/readme/rtd_list_all.png)
+
 ## Table of contents
 
 - [What can you learn from rtd?](#what-can-you-learn-from-rtd)

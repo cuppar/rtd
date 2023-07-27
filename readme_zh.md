@@ -9,6 +9,8 @@
 - `RTD` 同时也是一个[教程](https://github.com/cuppar/rtd/wiki/%5Bzh%5D00_Home)，旨在通过实践学习Rust。
 - Learning by doing!
 
+![rtd_list_all](Tutorial/doc/img/readme/rtd_list_all.png)
+
 ## 目录
 
 - [你能从RTD学到什么？](#你能从rtd学到什么)
