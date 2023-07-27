@@ -2,7 +2,7 @@
 English | [中文](https://github.com/cuppar/rtd/blob/master/readme_zh.md#500%E8%A1%8C%E4%BB%A3%E7%A0%81%E5%AD%A6%E4%BC%9Arust)
 
 - RTD (Rust To Do) is a todo app cli tool write by 500 lines Rust code. (exclude space lines/comments/long line break display/test code)
-- RTD is also a [tutorial(TODO)](), designed to learn Rust by doing.
+- RTD is also a [tutorial](https://github.com/cuppar/rtd/wiki), designed to learn Rust by doing.
 
 ## Table of contents
 
@@ -16,7 +16,7 @@ English | [中文](https://github.com/cuppar/rtd/blob/master/readme_zh.md#500%E8
 
 ## What can you learn from RTD?
 
-#### Assuming you know nothing about Rust, through the [Learn Rust by 500 lines code(TODO)]() tutorial, step by step to build the project from scratch, you will learn:
+#### Assuming you know nothing about Rust, through the [Learn Rust by 500 lines code](https://github.com/cuppar/rtd/wiki) tutorial, step by step to build the project from scratch, you will learn:
   - Rust common syntax
   - Rust module system (`package`/`binary crate`/`library crate`/`mod`/`pub`/`use`)
   - Rust ownership model (Bernstein conditions)
