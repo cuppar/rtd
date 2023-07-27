@@ -35,7 +35,7 @@
     - list all deleted items
 
 # storage
-save to a `/${HOME}/.rtd.csv` file
+save to a `${HOME}/.rtd.csv` file
 
 |id|name|completed|deleted|createdAt|completedAt|deletedAt|
 |-|-|-|-|-|-|-|
