@@ -35,12 +35,12 @@ English | [中文](https://github.com/cuppar/rtd/blob/master/readme_zh.md#500%E8
 
 ###### Architecture
 
-![rtd_arch](Tutorial/doc/img/rtd_arch.svg)
+![rtd_arch](Tutorial/doc/img/readme/rtd_arch.svg)
 
 ###### Storage
 Use a local file `$HOME/.rtd.csv` store all data
 
-![data_storage](Tutorial/doc/img/csv.png)
+![data_storage](Tutorial/doc/img/readme/csv.png)
 
 #### After completing this tutorial or installing RTD directly, you will get:
   - Extremely lightweight and concise todo command line application
@@ -79,8 +79,8 @@ rtd -h
 rtd --help
 ```
 
-![rtd_help_summary](Tutorial/doc/img/rtd_help_summary.png)
-![rtd_help](Tutorial/doc/img/rtd_help.png)
+![rtd_help_summary](Tutorial/doc/img/readme/rtd_help_summary.png)
+![rtd_help](Tutorial/doc/img/readme/rtd_help.png)
 
 #### Add a todo
 ```bash
@@ -88,7 +88,7 @@ rtd -a <item-name>
 rtd --add <item-name>
 ```
 
-![rtd_add](Tutorial/doc/img/rtd_add.png)
+![rtd_add](Tutorial/doc/img/readme/rtd_add.png)
 
 #### List all uncompleted todos
 ```bash
@@ -99,7 +99,7 @@ rtd --list
 rtd --list uncompleted
 ```
 
-![rtd_list_uncompleted](Tutorial/doc/img/rtd_list_uncompleted.png)
+![rtd_list_uncompleted](Tutorial/doc/img/readme/rtd_list_uncompleted.png)
 
 #### Complete a todo
 ```bash
@@ -107,7 +107,7 @@ rtd -c <item-id>
 rtd --complete <item-id>
 ```
 
-![rtd_complete_item](Tutorial/doc/img/rtd_complete_item.png)
+![rtd_complete_item](Tutorial/doc/img/readme/rtd_complete_item.png)
 
 #### List all completed todos
 ```bash
@@ -115,7 +115,7 @@ rtd -l completed
 rtd --list completed
 ```
 
-![rtd_list_completed](Tutorial/doc/img/rtd_list_completed.png)
+![rtd_list_completed](Tutorial/doc/img/readme/rtd_list_completed.png)
 
 #### Uncomplete a todo
 ```bash
@@ -123,7 +123,7 @@ rtd -u <item-id>
 rtd --uncomplete <item-id>
 ```
 
-![rtd_uncomplete_item](Tutorial/doc/img/rtd_uncomplete_item.png)
+![rtd_uncomplete_item](Tutorial/doc/img/readme/rtd_uncomplete_item.png)
 
 #### Throw a todo into the recycle bin
 ```bash
@@ -131,7 +131,7 @@ rtd -d <item-id>
 rtd --delete <item-id>
 ```
 
-![rtd_delete_item](Tutorial/doc/img/rtd_delete_item.png)
+![rtd_delete_item](Tutorial/doc/img/readme/rtd_delete_item.png)
 
 #### List all recycle bin todos
 ```bash
@@ -139,7 +139,7 @@ rtd -l deleted
 rtd --list deleted
 ```
 
-![rtd_list_deleted](Tutorial/doc/img/rtd_list_deleted.png)
+![rtd_list_deleted](Tutorial/doc/img/readme/rtd_list_deleted.png)
 
 #### Restore a todo from the recycle bin
 ```bash
@@ -147,21 +147,21 @@ rtd -r <item-id>
 rtd --restore <item-id>
 ```
 
-![rtd_restore_item](Tutorial/doc/img/rtd_restore_item.png)
+![rtd_restore_item](Tutorial/doc/img/readme/rtd_restore_item.png)
 
 #### Physically destroy a todo
 ```bash
 rtd --destroy <item-id>
 ```
 
-![rtd_destroy_item](Tutorial/doc/img/rtd_destroy_item.png)
+![rtd_destroy_item](Tutorial/doc/img/readme/rtd_destroy_item.png)
 
 #### Empty recycle bin
 ```bash
 rtd --destroy-deleted
 ```
 
-![rtd_destroy_deleted](Tutorial/doc/img/rtd_destroy_deleted.png)
+![rtd_destroy_deleted](Tutorial/doc/img/readme/rtd_destroy_deleted.png)
 
 #### List all todos
 ```bash
@@ -169,14 +169,14 @@ rtd -l all
 rtd --list all
 ```
 
-![rtd_list_all](Tutorial/doc/img/rtd_list_all.png)
+![rtd_list_all](Tutorial/doc/img/readme/rtd_list_all.png)
 
 #### Clear all todos
 ```bash
 rtd --clear
 ```
 
-![rtd_clear](Tutorial/doc/img/rtd_clear.png)
+![rtd_clear](Tutorial/doc/img/readme/rtd_clear.png)
 
 ## About author
 

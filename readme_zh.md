@@ -36,12 +36,12 @@
 
 ###### 架构图
 
-![rtd_arch_zh](Tutorial/doc/img/rtd_arch_zh.svg)
+![rtd_arch_zh](Tutorial/doc/img/readme/rtd_arch_zh.svg)
 
 ###### 存储
 使用一个本地文件 `$HOME/.rtd.csv` 存储所有数据
 
-![data_storage](Tutorial/doc/img/csv.png)
+![data_storage](Tutorial/doc/img/readme/csv.png)
 
 #### 完成该教程或直接安装RTD，你将得到:
   - 极其轻量级且简洁的todo命令行应用
@@ -82,8 +82,8 @@ rtd -h
 rtd --help
 ```
 
-![rtd_help_summary](Tutorial/doc/img/rtd_help_summary.png)
-![rtd_help](Tutorial/doc/img/rtd_help.png)
+![rtd_help_summary](Tutorial/doc/img/readme/rtd_help_summary.png)
+![rtd_help](Tutorial/doc/img/readme/rtd_help.png)
 
 #### 添加一个todo
 ```bash
@@ -91,7 +91,7 @@ rtd -a <item-name>
 rtd --add <item-name>
 ```
 
-![rtd_add](Tutorial/doc/img/rtd_add.png)
+![rtd_add](Tutorial/doc/img/readme/rtd_add.png)
 
 #### 列出所有未完成的todo
 ```bash
@@ -102,7 +102,7 @@ rtd --list
 rtd --list uncompleted
 ```
 
-![rtd_list_uncompleted](Tutorial/doc/img/rtd_list_uncompleted.png)
+![rtd_list_uncompleted](Tutorial/doc/img/readme/rtd_list_uncompleted.png)
 
 #### 完成一个todo
 ```bash
@@ -110,7 +110,7 @@ rtd -c <item-id>
 rtd --complete <item-id>
 ```
 
-![rtd_complete_item](Tutorial/doc/img/rtd_complete_item.png)
+![rtd_complete_item](Tutorial/doc/img/readme/rtd_complete_item.png)
 
 #### 列出所有已完成的todo
 ```bash
@@ -118,7 +118,7 @@ rtd -l completed
 rtd --list completed
 ```
 
-![rtd_list_completed](Tutorial/doc/img/rtd_list_completed.png)
+![rtd_list_completed](Tutorial/doc/img/readme/rtd_list_completed.png)
 
 #### 标记一个todo为未完成
 ```bash
@@ -126,7 +126,7 @@ rtd -u <item-id>
 rtd --uncomplete <item-id>
 ```
 
-![rtd_uncomplete_item](Tutorial/doc/img/rtd_uncomplete_item.png)
+![rtd_uncomplete_item](Tutorial/doc/img/readme/rtd_uncomplete_item.png)
 
 #### 把一个todo扔进回收站
 ```bash
@@ -134,7 +134,7 @@ rtd -d <item-id>
 rtd --delete <item-id>
 ```
 
-![rtd_delete_item](Tutorial/doc/img/rtd_delete_item.png)
+![rtd_delete_item](Tutorial/doc/img/readme/rtd_delete_item.png)
 
 #### 列出所有回收站的todo
 ```bash
@@ -142,7 +142,7 @@ rtd -l deleted
 rtd --list deleted
 ```
 
-![rtd_list_deleted](Tutorial/doc/img/rtd_list_deleted.png)
+![rtd_list_deleted](Tutorial/doc/img/readme/rtd_list_deleted.png)
 
 #### 从回收站恢复一个todo
 ```bash
@@ -150,21 +150,21 @@ rtd -r <item-id>
 rtd --restore <item-id>
 ```
 
-![rtd_restore_item](Tutorial/doc/img/rtd_restore_item.png)
+![rtd_restore_item](Tutorial/doc/img/readme/rtd_restore_item.png)
 
 #### 物理销毁一个todo
 ```bash
 rtd --destroy <item-id>
 ```
 
-![rtd_destroy_item](Tutorial/doc/img/rtd_destroy_item.png)
+![rtd_destroy_item](Tutorial/doc/img/readme/rtd_destroy_item.png)
 
 #### 清空回收站
 ```bash
 rtd --destroy-deleted
 ```
 
-![rtd_destroy_deleted](Tutorial/doc/img/rtd_destroy_deleted.png)
+![rtd_destroy_deleted](Tutorial/doc/img/readme/rtd_destroy_deleted.png)
 
 #### 列出所有todo
 ```bash
@@ -172,14 +172,14 @@ rtd -l all
 rtd --list all
 ```
 
-![rtd_list_all](Tutorial/doc/img/rtd_list_all.png)
+![rtd_list_all](Tutorial/doc/img/readme/rtd_list_all.png)
 
 #### 清空所有todo
 ```bash
 rtd --clear
 ```
 
-![rtd_clear](Tutorial/doc/img/rtd_clear.png)
+![rtd_clear](Tutorial/doc/img/readme/rtd_clear.png)
 
 ## 关于作者
 
