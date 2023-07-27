@@ -293,7 +293,7 @@ dependencies = [
 
 [[package]]
 name = "rtd-tutorial"
-version = "0.1.1"
+version = "0.1.6"
 dependencies = [
  "chrono",
  "clap",
