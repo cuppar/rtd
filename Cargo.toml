@@ -1,11 +1,11 @@
 [package]
 name = "rtd-tutorial"
-version = "0.1.3"
+version = "0.1.4"
 edition = "2021"
 license = "MIT"
 description = "Learn Rust by 500 lines code, build a Rust ToDo cli tool."
 homepage = "https://github.com/cuppar/rtd"
-documentation = "https://github.com/cuppar/rtd"
+documentation = "https://github.com/cuppar/rtd/wiki"
 repository = "https://github.com/cuppar/rtd"
 readme = "readme.md"
 keywords = ["tutorial", "guide", "todo", "learning-by-doing", "step-by-step-guide"]
