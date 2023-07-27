@@ -58,7 +58,7 @@ Use a local file `$HOME/.rtd.csv` store all data
 
 ---
 
-Interesting fact: I use RTD to complete the RTD tutorial, :)
+Interesting fact: I use RTD to complete the RTD tutorial :)
 
 If you like my tutorial, don't forget to give me a star~
 
