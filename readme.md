@@ -35,6 +35,7 @@ English | [中文](https://github.com/cuppar/rtd/blob/master/readme_zh.md#500%E8
   - Rust manipulating environment variables
   - Rust command line parameter parsing
   - Rust release package to crate.io
+  - The general process of developing a program (requirements/design/implementation/testing/release/maintenance)
   - Layered abstraction (data storage layer/model mapping layer/data model layer/business logic layer/application interface layer/user interface layer)
   - Handwritten serialization/deserialization from scratch
   - Implement the recycle bin function (virtualization concept)
