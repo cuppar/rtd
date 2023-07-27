@@ -6,7 +6,7 @@
 [English](https://github.com/cuppar/rtd#learn-rust-by-500-lines-code) | 中文
 
 - `RTD` (Rust To Do) 是一个用500行Rust 代码编写的todo app命令行应用。（不包括空行/注释/长行折断显示/测试代码）
-- `RTD` 同时也是一个[教程](https://github.com/cuppar/rtd/wiki/%5Bzh%5D00_Home)，旨在通过实践学习Rust。
+- `RTD` 同时也是一个[教程](https://github.com/cuppar/rtd/wiki/%5Bzh%5D00_%E9%A6%96%E9%A1%B5)，旨在通过实践学习Rust。
 - Learning by doing!
 
 ![rtd_list_all](Tutorial/doc/img/readme/rtd_list_all.png)
@@ -23,7 +23,7 @@
 
 ## 你能从RTD学到什么？
 
-#### 假设你对Rust一无所知，通过[500行代码学会Rust](https://github.com/cuppar/rtd/wiki/%5Bzh%5D00_Home)教程，一步步从零构建该项目，你将学会：
+#### 假设你对Rust一无所知，通过[500行代码学会Rust](https://github.com/cuppar/rtd/wiki/%5Bzh%5D00_%E9%A6%96%E9%A1%B5)教程，一步步从零构建该项目，你将学会：
   - Rust常用语法
   - Rust模块系统(`package`/`binary crate`/`library crate`/`mod`/`pub`/`use`)
   - Rust所有权模型(伯恩斯坦条件)
