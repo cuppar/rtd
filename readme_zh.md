@@ -46,6 +46,7 @@
 使用一个本地文件 `$HOME/.rtd.csv` 存储所有数据
 
 ![data_storage](Tutorial/doc/img/readme/csv.png)
+![rtd_list_all](Tutorial/doc/img/readme/rtd_list_all.png)
 
 #### 完成该教程或直接安装RTD，你将得到:
   - 极其轻量级且简洁的todo命令行应用
@@ -187,4 +188,4 @@ rtd --clear
 
 ## 关于作者
 
-何志颖(Cuppar He), 软件开发工程师, 喜欢编程, 技术写作，学习新东西, 尤其是计算机科学, 曾就职于[SAP](https://www.sap.com/)([世界百强](https://www.rankingthebrands.com/Brand-detail.aspx?brandID=22))和[阿里巴巴集团](https://www.alibabagroup.com/)([世界百强](https://www.rankingthebrands.com/Brand-detail.aspx?brandID=6245)&中国互联网巨头)。目前我在Gap Year, 如果你在寻找软件开发工程师并且能提供优质的offer(远程和现场都可以), 请与我联系`cuppar.hzy@gmail.com`。
+何志颖(Cuppar He), 软件开发工程师, 喜欢编程, 技术写作, 学习新东西, 尤其是计算机科学, 曾就职于[SAP](https://www.sap.com/)([世界百强](https://www.rankingthebrands.com/Brand-detail.aspx?brandID=22))和[阿里巴巴集团](https://www.alibabagroup.com/)([世界百强](https://www.rankingthebrands.com/Brand-detail.aspx?brandID=6245)&中国互联网巨头)。目前我在Gap Year, 如果你在寻找软件开发工程师并且能提供优质的offer(远程和现场都可以), 请与我联系`cuppar.hzy@gmail.com`。
