@@ -45,6 +45,7 @@ English | [中文](https://github.com/cuppar/rtd/blob/master/readme_zh.md#500%E8
 Use a local file `$HOME/.rtd.csv` store all data
 
 ![data_storage](Tutorial/doc/img/readme/csv.png)
+![rtd_list_all](Tutorial/doc/img/readme/rtd_list_all.png)
 
 #### After completing this tutorial or installing RTD directly, you will get:
   - Extremely lightweight and concise todo command line application
