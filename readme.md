@@ -73,7 +73,7 @@ cargo install --path rtd
 
 ## Usage
 
-#### view help document
+#### View help document
 ```bash
 rtd -h
 rtd --help
@@ -82,7 +82,7 @@ rtd --help
 ![rtd_help_summary](Tutorial/doc/img/rtd_help_summary.png)
 ![rtd_help](Tutorial/doc/img/rtd_help.png)
 
-#### add a todo
+#### Add a todo
 ```bash
 rtd -a <item-name>
 rtd --add <item-name>
@@ -117,7 +117,7 @@ rtd --list completed
 
 ![rtd_list_completed](Tutorial/doc/img/rtd_list_completed.png)
 
-#### uncomplete a todo
+#### Uncomplete a todo
 ```bash
 rtd -u <item-id>
 rtd --uncomplete <item-id>
@@ -180,4 +180,4 @@ rtd --clear
 
 ## About author
 
-Cuppar He(He Zhiying), software development engineer, likes programming, learning new things, especially computer science, worked for [SAP](https://www.sap.com/)([World Top 100](https://www.rankingthebrands.com/Brand-detail.aspx?brandID=22)) and [Alibaba Group](https://www.alibabagroup.com/)([World Top 100](https://www.rankingthebrands.com/Brand-detail.aspx?brandID=6245) & Chinese internet giant). I am currently in Gap Year, if you are looking for a software development engineer and can provide a high-quality offer(Both remote and on-site), please contact me `cuppar.hzy@gmail.com`.
+Cuppar He(He Zhiying), software development engineer, likes programming, technical writing, learning new things, especially computer science, worked for [SAP](https://www.sap.com/)([World Top 100](https://www.rankingthebrands.com/Brand-detail.aspx?brandID=22)) and [Alibaba Group](https://www.alibabagroup.com/)([World Top 100](https://www.rankingthebrands.com/Brand-detail.aspx?brandID=6245) & Chinese internet giant). I am currently in Gap Year, if you are looking for a software development engineer and can provide a high-quality offer(Both remote and on-site), please contact me `cuppar.hzy@gmail.com`.
