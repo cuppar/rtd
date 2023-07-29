@@ -68,10 +68,15 @@ pub fn destroy_deleted() -> Result<String> {
     if items.is_empty() {
         return Ok("Nothing to destory.".to_string());
     }
+    let mut result = String::new();
     for item in items {
-        destroy_item(item.id)?;
+        match destroy_item(item.id) {
+            Ok(s) => result += &s,
+            Err(e) => return Err(e),
+        }
     }
-    Ok("All deleted todos were destroyed.\n".to_string())
+    result += "All deleted todos were destroyed.\n";
+    Ok(result)
 }
 
 pub fn destroy_item(id: u32) -> Result<String> {
@@ -101,6 +106,7 @@ pub fn list_uncompleted() -> Result<String> {
     let mut result = "Uncompleted todos:\n\n".to_string();
     for item in items {
         result += &item.to_prettier_string();
+        result += "\n";
     }
     Ok(result)
 }
@@ -116,6 +122,7 @@ pub fn list_completed() -> Result<String> {
     let mut result = "Completed todos:\n\n".to_string();
     for item in items {
         result += &item.to_prettier_string();
+        result += "\n";
     }
     Ok(result)
 }
@@ -131,6 +138,7 @@ pub fn list_deleted() -> Result<String> {
     let mut result = "Deleted todos:\n\n".to_string();
     for item in items {
         result += &item.to_prettier_string();
+        result += "\n";
     }
     Ok(result)
 }
@@ -143,6 +151,7 @@ pub fn list_all() -> Result<String> {
     let mut result = "All todos:\n\n".to_string();
     for item in items {
         result += &item.to_prettier_string();
+        result += "\n";
     }
     Ok(result)
 }
