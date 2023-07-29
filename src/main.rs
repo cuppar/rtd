@@ -1,6 +1,5 @@
 use clap::{Parser, ValueEnum};
 use rtd_tutorial::*;
-use std::error::Error;
 
 /// Rust To Do, tutorial: https://github.com/cuppar/rtd
 #[derive(Parser, Debug)]
@@ -68,7 +67,7 @@ enum ListType {
     Deleted,
 }
 
-fn main() -> Result<(), Box<dyn Error>> {
+fn main() {
     let args = Args::parse();
 
     if let Some(name) = args.add {
@@ -163,8 +162,6 @@ fn main() -> Result<(), Box<dyn Error>> {
     if !already_listed {
         default_list();
     }
-
-    Ok(())
 }
 
 fn default_list() {
