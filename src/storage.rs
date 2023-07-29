@@ -217,7 +217,7 @@ type Result<T> = std::result::Result<T, StorageError>;
 #[derive(Debug)]
 pub enum StorageError {
     FileErr { source: FileHandleError },
-    ParseErr(ItemError),
+    ParseErr(ParseItemError),
     ItemNoExist(u32),
 }
 
@@ -273,8 +273,8 @@ impl From<std::io::Error> for StorageError {
     }
 }
 
-impl From<model::ItemError> for StorageError {
-    fn from(value: model::ItemError) -> Self {
+impl From<model::ParseItemError> for StorageError {
+    fn from(value: model::ParseItemError) -> Self {
         Self::ParseErr(value)
     }
 }

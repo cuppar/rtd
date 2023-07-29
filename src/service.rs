@@ -99,7 +99,7 @@ pub fn list_uncompleted() -> Result<String> {
         return Ok("Nothing need to do.".to_string());
     }
     for item in items {
-        println!("{}", item.show());
+        println!("{}", item.to_prettier_string());
     }
     Ok("Uncompleted todos:\n".to_string())
 }
@@ -113,7 +113,7 @@ pub fn list_completed() -> Result<String> {
         return Ok("Nothing completed.".to_string());
     }
     for item in items {
-        println!("{}", item.show());
+        println!("{}", item.to_prettier_string());
     }
     Ok("Completed todos:\n".to_string())
 }
@@ -127,7 +127,7 @@ pub fn list_deleted() -> Result<String> {
         return Ok("Nothing deleted.".to_string());
     }
     for item in items {
-        println!("{}", item.show());
+        println!("{}", item.to_prettier_string());
     }
     Ok("Deleted todos:\n".to_string())
 }
@@ -138,7 +138,7 @@ pub fn list_all() -> Result<String> {
         return Ok("Nothing need to do.".to_string());
     }
     for item in items {
-        println!("{}", item.show());
+        println!("{}", item.to_prettier_string());
     }
     Ok("All todos:\n".to_string())
 }

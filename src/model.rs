@@ -1,13 +1,10 @@
+use chrono::*;
 use std::{
     error::Error,
     fmt::Display,
     num::ParseIntError,
     str::{FromStr, ParseBoolError},
 };
-
-use chrono::*;
-
-const ITEM_COUNT: usize = 7;
 
 #[derive(Debug, Clone)]
 pub struct Item {
@@ -21,6 +18,9 @@ pub struct Item {
 }
 
 impl Item {
+    /// Associated Functions,
+    /// which first parameter is NOT `&self(self: &Self)`,
+    /// `&mut self(self: &mut Self)` or `self(self: Self)`
     pub fn new(
         id: u32,
         name: &str,
@@ -41,11 +41,16 @@ impl Item {
         }
     }
 
+    /// methods,
+    /// which first parameter is `&self(self: &Self)`,
+    /// `&mut self(self: &mut Self)` or `self(self: Self)`
+    /// if `id` property is not `pub`
+    /// we can use methods to support `getter` or `setter`
     pub fn id(&self) -> u32 {
         self.id
     }
 
-    pub fn show(&self) -> String {
+    pub fn to_prettier_string(&self) -> String {
         let created_at = if let Some(time_stamp) = self.created_at {
             if let Some(utc) = NaiveDateTime::from_timestamp_opt(time_stamp, 0) {
                 Local.from_utc_datetime(&utc).to_string()
@@ -114,6 +119,7 @@ impl Item {
     }
 }
 
+/// Serialization
 impl ToString for Item {
     fn to_string(&self) -> String {
         let mut created_at = String::new();
@@ -143,12 +149,17 @@ impl ToString for Item {
     }
 }
 
+/// Deserialization
 impl FromStr for Item {
-    type Err = ItemError;
+    type Err = ParseItemError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let splited = s.split(',').collect::<Vec<_>>();
         if splited.len() < ITEM_COUNT {
-            return Err(ItemError::ParseErr("item lack".to_string()));
+            return Err(ParseItemError(format!(
+                "Expected {} properties, found {}",
+                ITEM_COUNT,
+                splited.len()
+            )));
         }
         let id = splited[0].parse::<u32>()?;
         let name = &splited[1]
@@ -191,32 +202,28 @@ impl FromStr for Item {
 }
 
 #[derive(Debug)]
-pub enum ItemError {
-    ParseErr(String),
-}
+pub struct ParseItemError(String);
 
-impl Error for ItemError {}
+impl Error for ParseItemError {}
 
-impl Display for ItemError {
+impl Display for ParseItemError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        use ItemError::*;
-        match self {
-            ParseErr(s) => write!(f, "{}", s),
-        }
+        writeln!(f, "Deserialization todo fail: {}", self.0)
     }
 }
 
-impl From<ParseIntError> for ItemError {
+impl From<ParseIntError> for ParseItemError {
     fn from(value: ParseIntError) -> Self {
-        Self::ParseErr(value.to_string())
+        Self(value.to_string())
     }
 }
 
-impl From<ParseBoolError> for ItemError {
+impl From<ParseBoolError> for ParseItemError {
     fn from(value: ParseBoolError) -> Self {
-        Self::ParseErr(value.to_string())
+        Self(value.to_string())
     }
 }
 
+const ITEM_COUNT: usize = 7;
 const COMMA_FAKE: &str = "<@^_fake_comma_$#>";
 const NEWLINE_FAKE: &str = "<@^_fake_newline_$#>";
