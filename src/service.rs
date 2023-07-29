@@ -20,48 +20,44 @@ pub fn add_item(name: &str) -> Result<String> {
     Ok(format!("Added [{}]: {}\n", item.id, item.name))
 }
 
-pub fn complete_item(id: u32) -> Result<()> {
+pub fn complete_item(id: u32) -> Result<String> {
     let item = get_item_by_id(id)?;
     update_item(Item {
         completed: true,
         completed_at: Some(Local::now().timestamp()),
         ..item.clone()
     })?;
-    println!("Completed [{}]: {}\n", item.id, item.name);
-    Ok(())
+    Ok(format!("Completed [{}]: {}\n", item.id, item.name))
 }
 
-pub fn uncomplete_item(id: u32) -> Result<()> {
+pub fn uncomplete_item(id: u32) -> Result<String> {
     let item = get_item_by_id(id)?;
     update_item(Item {
         completed: false,
         completed_at: None,
         ..item.clone()
     })?;
-    println!("Uncompleted [{}]: {}\n", item.id, item.name);
-    Ok(())
+    Ok(format!("Uncompleted [{}]: {}\n", item.id, item.name))
 }
 
-pub fn delete_item(id: u32) -> Result<()> {
+pub fn delete_item(id: u32) -> Result<String> {
     let item = get_item_by_id(id)?;
     update_item(Item {
         deleted: true,
         deleted_at: Some(Local::now().timestamp()),
         ..item.clone()
     })?;
-    println!("Deleted [{}]: {}\n", item.id, item.name);
-    Ok(())
+    Ok(format!("Deleted [{}]: {}\n", item.id, item.name))
 }
 
-pub fn restore_item(id: u32) -> Result<()> {
+pub fn restore_item(id: u32) -> Result<String> {
     let item = get_item_by_id(id)?;
     update_item(Item {
         deleted: false,
         deleted_at: None,
         ..item.clone()
     })?;
-    println!("Restored [{}]: {}\n", item.id, item.name);
-    Ok(())
+    Ok(format!("Restored [{}]: {}\n", item.id, item.name))
 }
 
 pub fn destroy_deleted() -> Result<String> {
@@ -94,65 +90,57 @@ pub fn clear() -> Result<String> {
     Ok("All todos were destroyed.\n".to_string())
 }
 
-pub fn list_uncompleted() -> Result<()> {
+pub fn list_uncompleted() -> Result<String> {
     let items = storage::get_all()?
         .into_iter()
         .filter(|item| !item.deleted && !item.completed)
         .collect::<Vec<_>>();
     if items.is_empty() {
-        println!("Nothing need to do.");
-        return Ok(());
+        return Ok("Nothing need to do.".to_string());
     }
-    println!("Uncompleted todos:\n");
     for item in items {
         println!("{}", item.show());
     }
-    Ok(())
+    Ok("Uncompleted todos:\n".to_string())
 }
 
-pub fn list_completed() -> Result<()> {
+pub fn list_completed() -> Result<String> {
     let items = storage::get_all()?
         .into_iter()
         .filter(|item| !item.deleted && item.completed)
         .collect::<Vec<_>>();
     if items.is_empty() {
-        println!("Nothing completed.");
-        return Ok(());
+        return Ok("Nothing completed.".to_string());
     }
-    println!("Completed todos:\n");
     for item in items {
         println!("{}", item.show());
     }
-    Ok(())
+    Ok("Completed todos:\n".to_string())
 }
 
-pub fn list_deleted() -> Result<()> {
+pub fn list_deleted() -> Result<String> {
     let items = storage::get_all()?
         .into_iter()
         .filter(|item| item.deleted)
         .collect::<Vec<_>>();
     if items.is_empty() {
-        println!("Nothing deleted.");
-        return Ok(());
+        return Ok("Nothing deleted.".to_string());
     }
-    println!("Deleted todos:\n");
     for item in items {
         println!("{}", item.show());
     }
-    Ok(())
+    Ok("Deleted todos:\n".to_string())
 }
 
-pub fn list_all() -> Result<()> {
+pub fn list_all() -> Result<String> {
     let items = storage::get_all()?;
     if items.is_empty() {
-        println!("Nothing need to do.");
-        return Ok(());
+        return Ok("Nothing need to do.".to_string());
     }
-    println!("All todos:\n");
     for item in items {
         println!("{}", item.show());
     }
-    Ok(())
+    Ok("All todos:\n".to_string())
 }
 
 type Result<T> = std::result::Result<T, ServiceError>;

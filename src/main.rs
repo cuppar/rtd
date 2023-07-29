@@ -79,19 +79,31 @@ fn main() -> Result<(), Box<dyn Error>> {
     }
 
     if let Some(id) = args.complete {
-        complete_item(id)?;
+        match complete_item(id) {
+            Ok(s) => println!("{s}"),
+            Err(e) => eprintln!("Complete todo '{id}' fail: {e}"),
+        }
     }
 
     if let Some(id) = args.uncomplete {
-        uncomplete_item(id)?;
+        match uncomplete_item(id) {
+            Ok(s) => println!("{s}"),
+            Err(e) => eprintln!("Uncomplete todo '{id}' fail: {e}"),
+        }
     }
 
     if let Some(id) = args.delete {
-        delete_item(id)?;
+        match delete_item(id) {
+            Ok(s) => println!("{s}"),
+            Err(e) => eprintln!("Delete todo '{id}' fail: {e}"),
+        }
     }
 
     if let Some(id) = args.restore {
-        restore_item(id)?;
+        match restore_item(id) {
+            Ok(s) => println!("{s}"),
+            Err(e) => eprintln!("Delete todo '{id}' fail: {e}"),
+        }
     }
 
     // destroy operation need be after all operation which need a todo exist
@@ -99,7 +111,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     if let Some(id) = args.destroy {
         match destroy_item(id) {
             Ok(s) => println!("{s}"),
-            Err(e) => eprintln!("Destroy todo {id} fail: {e}"),
+            Err(e) => eprintln!("Destroy todo '{id}' fail: {e}"),
         };
     }
 
@@ -124,24 +136,40 @@ fn main() -> Result<(), Box<dyn Error>> {
     let mut already_listed = false;
 
     if let Some(None) = args.list {
-        list_uncompleted()?;
+        default_list();
         already_listed = true;
     }
 
     if let Some(Some(list_type)) = args.list {
         use ListType::*;
         match list_type {
-            All => list_all()?,
-            Completed => list_completed()?,
-            Uncompleted => list_uncompleted()?,
-            Deleted => list_deleted()?,
+            All => match list_all() {
+                Ok(s) => println!("{s}"),
+                Err(e) => eprint!("List all todos fail: {e}"),
+            },
+            Completed => match list_completed() {
+                Ok(s) => println!("{s}"),
+                Err(e) => eprint!("List completed todos fail: {e}"),
+            },
+            Uncompleted => default_list(),
+            Deleted => match list_deleted() {
+                Ok(s) => println!("{s}"),
+                Err(e) => eprint!("List deleted todos fail: {e}"),
+            },
         }
         already_listed = true;
     }
 
     if !already_listed {
-        list_uncompleted()?;
+        default_list();
     }
 
     Ok(())
+}
+
+fn default_list() {
+    match list_uncompleted() {
+        Ok(s) => println!("{s}"),
+        Err(e) => eprint!("List uncompleted todos fail: {e}"),
+    }
 }
