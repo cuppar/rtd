@@ -3,7 +3,6 @@ use std::{
     error::Error,
     fmt::Display,
     num::ParseIntError,
-    result,
     str::{FromStr, ParseBoolError},
 };
 
@@ -52,59 +51,9 @@ impl Item {
     }
 
     pub fn to_prettier_string(&self) -> String {
-        let created_at = if let Some(time_stamp) = self.created_at {
-            if let Some(utc) = NaiveDateTime::from_timestamp_opt(time_stamp, 0) {
-                Local.from_utc_datetime(&utc).to_string()
-            } else {
-                String::new()
-            }
-        } else {
-            String::new()
-        };
-
-        let completed_at = if let Some(time_stamp) = self.completed_at {
-            if let Some(utc) = NaiveDateTime::from_timestamp_opt(time_stamp, 0) {
-                Local.from_utc_datetime(&utc).to_string()
-            } else {
-                String::new()
-            }
-        } else {
-            String::new()
-        };
-
-        let deleted_at = if let Some(time_stamp) = self.deleted_at {
-            if let Some(utc) = NaiveDateTime::from_timestamp_opt(time_stamp, 0) {
-                Local.from_utc_datetime(&utc).to_string()
-            } else {
-                String::new()
-            }
-        } else {
-            String::new()
-        };
-
-        // let mut result = if self.deleted {
-        //     format!(
-        //         "{:3} {} \u{1f6ae} {}\n\n",
-        //         self.id,
-        //         if self.completed {
-        //             "\u{2705}"
-        //         } else {
-        //             "\u{1f532}"
-        //         },
-        //         self.name,
-        //     )
-        // } else {
-        //     format!(
-        //         "{:3} {} {}\n\n",
-        //         self.id,
-        //         if self.completed {
-        //             "\u{2705}"
-        //         } else {
-        //             "\u{1f532}"
-        //         },
-        //         self.name,
-        //     )
-        // };
+        let created_at = timestamp_to_datetime_string(self.created_at);
+        let completed_at = timestamp_to_datetime_string(self.completed_at);
+        let deleted_at = timestamp_to_datetime_string(self.deleted_at);
 
         let mut result = format!(
             "{:3} {} {} {}\n\n",
@@ -135,20 +84,9 @@ impl Item {
 /// Serialization
 impl ToString for Item {
     fn to_string(&self) -> String {
-        let mut created_at = String::new();
-        if let Some(x) = self.created_at {
-            created_at = x.to_string();
-        }
-
-        let mut completed_at = String::new();
-        if let Some(x) = self.completed_at {
-            completed_at = x.to_string();
-        }
-
-        let mut deleted_at = String::new();
-        if let Some(x) = self.deleted_at {
-            deleted_at = x.to_string();
-        }
+        let created_at = timestamp_to_raw_string(self.created_at);
+        let completed_at = timestamp_to_raw_string(self.completed_at);
+        let deleted_at = timestamp_to_raw_string(self.deleted_at);
 
         let name = self
             .name
@@ -165,42 +103,28 @@ impl ToString for Item {
 /// Deserialization
 impl FromStr for Item {
     type Err = ParseItemError;
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
         let splited = s.split(',').collect::<Vec<_>>();
-        if splited.len() < ITEM_COUNT {
+        if splited.len() != ITEM_COUNT {
             return Err(ParseItemError(format!(
                 "Expected {} properties, found {}",
                 ITEM_COUNT,
                 splited.len()
             )));
         }
+
         let id = splited[0].parse::<u32>()?;
         let name = &splited[1]
             .replace(COMMA_FAKE, ",")
             .replace(NEWLINE_FAKE, "\n");
+
         let completed = splited[2].parse::<bool>()?;
         let deleted = splited[3].parse::<bool>()?;
 
-        let created_at_str = splited[4];
-        let created_at = if created_at_str.is_empty() {
-            None
-        } else {
-            Some(created_at_str.parse::<i64>()?)
-        };
-
-        let completed_at_str = splited[5];
-        let completed_at = if completed_at_str.is_empty() {
-            None
-        } else {
-            Some(completed_at_str.parse::<i64>()?)
-        };
-
-        let deleted_at_str = splited[6];
-        let deleted_at = if deleted_at_str.is_empty() {
-            None
-        } else {
-            Some(deleted_at_str.parse::<i64>()?)
-        };
+        let created_at = str_to_timestamp(splited[4])?;
+        let completed_at = str_to_timestamp(splited[5])?;
+        let deleted_at = str_to_timestamp(splited[6])?;
 
         Ok(Item::new(
             id,
@@ -216,6 +140,8 @@ impl FromStr for Item {
 
 #[derive(Debug)]
 pub struct ParseItemError(String);
+
+type Result<T> = std::result::Result<T, ParseItemError>;
 
 impl Error for ParseItemError {}
 
@@ -240,3 +166,31 @@ impl From<ParseBoolError> for ParseItemError {
 const ITEM_COUNT: usize = 7;
 const COMMA_FAKE: &str = "<@^_fake_comma_$#>";
 const NEWLINE_FAKE: &str = "<@^_fake_newline_$#>";
+
+fn timestamp_to_datetime_string(timestamp: Option<i64>) -> String {
+    if let Some(time_stamp) = timestamp {
+        if let Some(utc) = NaiveDateTime::from_timestamp_opt(time_stamp, 0) {
+            Local.from_utc_datetime(&utc).to_string()
+        } else {
+            String::new()
+        }
+    } else {
+        String::new()
+    }
+}
+
+fn timestamp_to_raw_string(timestamp: Option<i64>) -> String {
+    if let Some(x) = timestamp {
+        x.to_string()
+    } else {
+        String::new()
+    }
+}
+
+fn str_to_timestamp(s: &str) -> Result<Option<i64>> {
+    if s.is_empty() {
+        Ok(None)
+    } else {
+        Ok(Some(s.parse::<i64>()?))
+    }
+}
