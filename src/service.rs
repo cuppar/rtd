@@ -68,15 +68,12 @@ pub fn destroy_deleted() -> Result<String> {
     if items.is_empty() {
         return Ok("Nothing to destory.".to_string());
     }
-    let mut result = String::new();
+    let mut result_string = String::new();
     for item in items {
-        match destroy_item(item.id) {
-            Ok(s) => result += &s,
-            Err(e) => return Err(e),
-        }
+        result_string += &destroy_item(item.id)?
     }
-    result += "All deleted todos were destroyed.\n";
-    Ok(result)
+    result_string += "All deleted todos were destroyed.\n";
+    Ok(result_string)
 }
 
 pub fn destroy_item(id: u32) -> Result<String> {
@@ -89,8 +86,9 @@ pub fn clear() -> Result<String> {
     if items.is_empty() {
         return Ok("Nothing to clear.".to_string());
     }
+    let mut result_string = String::new();
     for item in items {
-        destroy_item(item.id)?;
+        result_string += &destroy_item(item.id)?
     }
     Ok("All todos were destroyed.\n".to_string())
 }

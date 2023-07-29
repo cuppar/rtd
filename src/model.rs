@@ -68,13 +68,13 @@ impl Item {
         );
 
         if !created_at.is_empty() {
-            result += &format!("\tcreated at: {}\n", created_at);
+            result += &format!("\tCreated at: {}\n", created_at);
         }
         if !completed_at.is_empty() {
-            result += &format!("\tcompleted at: {}\n", completed_at);
+            result += &format!("\tCompleted at: {}\n", completed_at);
         }
         if !deleted_at.is_empty() {
-            result += &format!("\tdeleted at: {}\n", deleted_at);
+            result += &format!("\tDeleted at: {}\n", deleted_at);
         }
 
         result
