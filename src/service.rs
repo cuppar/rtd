@@ -98,10 +98,11 @@ pub fn list_uncompleted() -> Result<String> {
     if items.is_empty() {
         return Ok("Nothing need to do.".to_string());
     }
+    let mut result = "Uncompleted todos:\n\n".to_string();
     for item in items {
-        println!("{}", item.to_prettier_string());
+        result += &item.to_prettier_string();
     }
-    Ok("Uncompleted todos:\n".to_string())
+    Ok(result)
 }
 
 pub fn list_completed() -> Result<String> {
@@ -112,10 +113,11 @@ pub fn list_completed() -> Result<String> {
     if items.is_empty() {
         return Ok("Nothing completed.".to_string());
     }
+    let mut result = "Completed todos:\n\n".to_string();
     for item in items {
-        println!("{}", item.to_prettier_string());
+        result += &item.to_prettier_string();
     }
-    Ok("Completed todos:\n".to_string())
+    Ok(result)
 }
 
 pub fn list_deleted() -> Result<String> {
@@ -126,10 +128,11 @@ pub fn list_deleted() -> Result<String> {
     if items.is_empty() {
         return Ok("Nothing deleted.".to_string());
     }
+    let mut result = "Deleted todos:\n\n".to_string();
     for item in items {
-        println!("{}", item.to_prettier_string());
+        result += &item.to_prettier_string();
     }
-    Ok("Deleted todos:\n".to_string())
+    Ok(result)
 }
 
 pub fn list_all() -> Result<String> {
@@ -137,10 +140,11 @@ pub fn list_all() -> Result<String> {
     if items.is_empty() {
         return Ok("Nothing need to do.".to_string());
     }
+    let mut result = "All todos:\n\n".to_string();
     for item in items {
-        println!("{}", item.to_prettier_string());
+        result += &item.to_prettier_string();
     }
-    Ok("All todos:\n".to_string())
+    Ok(result)
 }
 
 type Result<T> = std::result::Result<T, ServiceError>;
