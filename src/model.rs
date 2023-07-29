@@ -3,6 +3,7 @@ use std::{
     error::Error,
     fmt::Display,
     num::ParseIntError,
+    result,
     str::{FromStr, ParseBoolError},
 };
 
@@ -81,29 +82,41 @@ impl Item {
             String::new()
         };
 
-        let mut result = if self.deleted {
-            format!(
-                "{:3} {} \u{1f6ae} {}\n\n",
-                self.id,
-                if self.completed {
-                    "\u{2705}"
-                } else {
-                    "\u{1f532}"
-                },
-                self.name,
-            )
-        } else {
-            format!(
-                "{:3} {} {}\n\n",
-                self.id,
-                if self.completed {
-                    "\u{2705}"
-                } else {
-                    "\u{1f532}"
-                },
-                self.name,
-            )
-        };
+        // let mut result = if self.deleted {
+        //     format!(
+        //         "{:3} {} \u{1f6ae} {}\n\n",
+        //         self.id,
+        //         if self.completed {
+        //             "\u{2705}"
+        //         } else {
+        //             "\u{1f532}"
+        //         },
+        //         self.name,
+        //     )
+        // } else {
+        //     format!(
+        //         "{:3} {} {}\n\n",
+        //         self.id,
+        //         if self.completed {
+        //             "\u{2705}"
+        //         } else {
+        //             "\u{1f532}"
+        //         },
+        //         self.name,
+        //     )
+        // };
+
+        let mut result = format!(
+            "{:3} {} {} {}\n\n",
+            self.id,
+            if self.completed {
+                "\u{2705}"
+            } else {
+                "\u{1f532}"
+            },
+            if self.deleted { "\u{1f6ae}" } else { "" },
+            self.name,
+        );
 
         if !created_at.is_empty() {
             result += &format!("\tcreated at: {}\n", created_at);
