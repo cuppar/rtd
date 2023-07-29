@@ -1,3 +1,4 @@
+use crate::model::{self, *};
 use std::env::{self, VarError};
 use std::error::Error;
 use std::fmt::Display;
@@ -5,10 +6,6 @@ use std::fs::File;
 use std::fs::{self, OpenOptions};
 use std::io::{BufReader, BufWriter, Read, Seek, Write};
 use std::path::Path;
-
-use crate::model;
-
-use crate::model::*;
 
 pub fn add_item(item: Item) -> Result<()> {
     let mut csv = Csv::new()?;
