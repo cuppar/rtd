@@ -1,13 +1,11 @@
-use std::{error::Error, fmt::Display};
-
-use chrono::Local;
-
 use crate::{
     model::Item,
     storage::{self, get_item_by_id, get_max_id, update_item, StorageError},
 };
+use chrono::Local;
+use std::{error::Error, fmt::Display};
 
-pub fn add_item(name: &str) -> Result<()> {
+pub fn add_item(name: &str) -> Result<String> {
     let max_id = get_max_id()?;
     let item = Item::new(
         max_id + 1,
@@ -19,42 +17,17 @@ pub fn add_item(name: &str) -> Result<()> {
         None,
     );
     storage::add_item(item.clone())?;
-    println!("Added [{}]: {}\n", item.id, item.name);
-    Ok(())
+    Ok(format!("Added [{}]: {}\n", item.id, item.name))
 }
 
-pub fn destroy_item(id: u32) -> Result<()> {
-    storage::delete_item(id)?;
-    println!("Destroyed [{}]\n", id);
-    Ok(())
-}
-
-pub fn destroy_deleted() -> Result<()> {
-    let items = storage::get_all()?
-        .into_iter()
-        .filter(|item| item.deleted)
-        .collect::<Vec<_>>();
-    if items.is_empty() {
-        println!("Nothing to destory.");
-        return Ok(());
-    }
-    for item in items {
-        destroy_item(item.id)?;
-    }
-    println!("All deleted todos were destroyed.\n");
-    Ok(())
-}
-
-pub fn clear() -> Result<()> {
-    let items = storage::get_all()?;
-    if items.is_empty() {
-        println!("Nothing to clear.");
-        return Ok(());
-    }
-    for item in items {
-        destroy_item(item.id)?;
-    }
-    println!("All todos were destroyed.\n");
+pub fn complete_item(id: u32) -> Result<()> {
+    let item = get_item_by_id(id)?;
+    update_item(Item {
+        completed: true,
+        completed_at: Some(Local::now().timestamp()),
+        ..item.clone()
+    })?;
+    println!("Completed [{}]: {}\n", item.id, item.name);
     Ok(())
 }
 
@@ -66,17 +39,6 @@ pub fn uncomplete_item(id: u32) -> Result<()> {
         ..item.clone()
     })?;
     println!("Uncompleted [{}]: {}\n", item.id, item.name);
-    Ok(())
-}
-
-pub fn complete_item(id: u32) -> Result<()> {
-    let item = get_item_by_id(id)?;
-    update_item(Item {
-        completed: true,
-        completed_at: Some(Local::now().timestamp()),
-        ..item.clone()
-    })?;
-    println!("Completed [{}]: {}\n", item.id, item.name);
     Ok(())
 }
 
@@ -100,6 +62,36 @@ pub fn restore_item(id: u32) -> Result<()> {
     })?;
     println!("Restored [{}]: {}\n", item.id, item.name);
     Ok(())
+}
+
+pub fn destroy_deleted() -> Result<String> {
+    let items = storage::get_all()?
+        .into_iter()
+        .filter(|item| item.deleted)
+        .collect::<Vec<_>>();
+    if items.is_empty() {
+        return Ok("Nothing to destory.".to_string());
+    }
+    for item in items {
+        destroy_item(item.id)?;
+    }
+    Ok("All deleted todos were destroyed.\n".to_string())
+}
+
+pub fn destroy_item(id: u32) -> Result<String> {
+    storage::delete_item(id)?;
+    Ok(format!("Destroyed [{}]\n", id))
+}
+
+pub fn clear() -> Result<String> {
+    let items = storage::get_all()?;
+    if items.is_empty() {
+        return Ok("Nothing to clear.".to_string());
+    }
+    for item in items {
+        destroy_item(item.id)?;
+    }
+    Ok("All todos were destroyed.\n".to_string())
 }
 
 pub fn list_uncompleted() -> Result<()> {
@@ -133,6 +125,7 @@ pub fn list_completed() -> Result<()> {
     }
     Ok(())
 }
+
 pub fn list_deleted() -> Result<()> {
     let items = storage::get_all()?
         .into_iter()
@@ -166,21 +159,22 @@ type Result<T> = std::result::Result<T, ServiceError>;
 
 #[derive(Debug)]
 pub enum ServiceError {
-    StorageErr(StorageError),
+    Storage(StorageError),
 }
 
 impl Error for ServiceError {}
+
 impl Display for ServiceError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         use ServiceError::*;
         match self {
-            StorageErr(e) => write!(f, "rtd service storage error: {}", e),
+            Storage(e) => writeln!(f, "Rtd service storage error: {}", e),
         }
     }
 }
 
 impl From<StorageError> for ServiceError {
     fn from(value: StorageError) -> Self {
-        Self::StorageErr(value)
+        Self::Storage(value)
     }
 }

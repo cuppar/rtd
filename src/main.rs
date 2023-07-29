@@ -1,7 +1,6 @@
-use std::error::Error;
-
 use clap::{Parser, ValueEnum};
 use rtd_tutorial::*;
+use std::error::Error;
 
 /// Rust To Do, tutorial: https://github.com/cuppar/rtd
 #[derive(Parser, Debug)]
@@ -73,7 +72,10 @@ fn main() -> Result<(), Box<dyn Error>> {
     let args = Args::parse();
 
     if let Some(name) = args.add {
-        add_item(&name)?;
+        match add_item(&name) {
+            Ok(s) => println!("{s}"),
+            Err(e) => eprintln!("Add '{name}' fail: {e}"),
+        }
     }
 
     if let Some(id) = args.complete {
@@ -92,23 +94,38 @@ fn main() -> Result<(), Box<dyn Error>> {
         restore_item(id)?;
     }
 
+    // destroy operation need be after all operation which need a todo exist
+    // or it can NOT find a todo when user execute the operation and destroy it at same time
     if let Some(id) = args.destroy {
-        destroy_item(id)?;
+        match destroy_item(id) {
+            Ok(s) => println!("{s}"),
+            Err(e) => eprintln!("Destroy todo {id} fail: {e}"),
+        };
     }
 
+    // destroy operation need be after all operation which need a todo exist
+    // or it can NOT find a todo when user execute the operation and destroy it at same time
     if args.destroy_deleted {
-        destroy_deleted()?;
+        match destroy_deleted() {
+            Ok(s) => println!("{s}"),
+            Err(e) => eprintln!("Destroy all deleted todos fail: {e}"),
+        };
     }
 
+    // destroy operation need be after all operation which need a todo exist
+    // or it can NOT find a todo when user execute the operation and destroy it at same time
     if args.clear {
-        clear()?;
+        match clear() {
+            Ok(s) => println!("{s}"),
+            Err(e) => eprintln!("Clear all todos fail: {e}"),
+        };
     }
 
-    let mut already_list = false;
+    let mut already_listed = false;
 
     if let Some(None) = args.list {
         list_uncompleted()?;
-        already_list = true;
+        already_listed = true;
     }
 
     if let Some(Some(list_type)) = args.list {
@@ -119,10 +136,10 @@ fn main() -> Result<(), Box<dyn Error>> {
             Uncompleted => list_uncompleted()?,
             Deleted => list_deleted()?,
         }
-        already_list = true;
+        already_listed = true;
     }
 
-    if !already_list {
+    if !already_listed {
         list_uncompleted()?;
     }
 
