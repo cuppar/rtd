@@ -1,6 +1,6 @@
 [package]
 name = "rtd-tutorial"
-version = "0.1.17"
+version = "0.1.18"
 edition = "2021"
 license = "MIT"
 description = "Learn Rust by 500 lines code, build a Rust ToDo cli tool."
