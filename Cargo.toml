@@ -8,7 +8,13 @@ homepage = "https://github.com/cuppar/rtd"
 documentation = "https://github.com/cuppar/rtd/wiki"
 repository = "https://github.com/cuppar/rtd"
 readme = "readme.md"
-keywords = ["tutorial", "guide", "todo", "learning-by-doing", "step-by-step-guide"]
+keywords = [
+    "tutorial",
+    "guide",
+    "todo",
+    "learning-by-doing",
+    "step-by-step-guide",
+]
 categories = ["command-line-utilities"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
