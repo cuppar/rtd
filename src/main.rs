@@ -101,7 +101,7 @@ fn main() {
     if let Some(id) = args.restore {
         match restore_item(id) {
             Ok(s) => println!("{s}"),
-            Err(e) => eprintln!("Delete todo '{id}' fail: {e}"),
+            Err(e) => eprintln!("Restore todo '{id}' fail: {e}"),
         }
     }
 
