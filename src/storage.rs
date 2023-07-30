@@ -16,65 +16,23 @@ pub fn add_item(item: Item) -> Result<()> {
 }
 
 pub fn update_item(item: Item) -> Result<()> {
-    let mut csv = Csv::new()?;
-    let content = csv.content()?;
-
-    let old_item_str = content.lines().find(|line| {
-        if let Ok(it) = line.parse::<Item>() {
-            it.id() == item.id()
-        } else {
-            false
-        }
-    });
-
-    let old_item_str = if let Some(str) = old_item_str {
-        str
-    } else {
-        return Err(StorageError::ItemNoExist(item.id()));
-    };
-
-    let prev_lines = content.lines().take_while(|line| {
-        if let Ok(it) = line.parse::<Item>() {
-            it.id() != item.id()
-        } else {
-            true
-        }
-    });
-    let offset: usize = prev_lines.map(|line| line.len() + 1).sum();
-    csv.splice(
+    let to_update_item = get_item_by_id(item.id())?;
+    let offset = get_offset_by_id(item.id())?;
+    Csv::new()?.splice(
         offset as u64,
-        old_item_str.len() as u64,
-        item.to_string().as_str(),
+        to_update_item.to_string().len() as u64,
+        &item.to_string(),
     )
 }
 
 pub fn delete_item(id: u32) -> Result<()> {
-    let mut csv = Csv::new()?;
-    let content = csv.content()?;
-
-    let old_item_str = content.lines().find(|line| {
-        if let Ok(it) = line.parse::<Item>() {
-            it.id() == id
-        } else {
-            false
-        }
-    });
-
-    let old_item_str = if let Some(str) = old_item_str {
-        str
-    } else {
-        return Err(StorageError::ItemNoExist(id));
-    };
-
-    let prev_lines = content.lines().take_while(|line| {
-        if let Ok(it) = line.parse::<Item>() {
-            it.id() != id
-        } else {
-            true
-        }
-    });
-    let offset: usize = prev_lines.map(|line| line.len() + 1).sum();
-    csv.splice(offset as u64, old_item_str.len() as u64 + 1, "")
+    let to_delete_item = get_item_by_id(id)?;
+    let offset = get_offset_by_id(id)?;
+    Csv::new()?.splice(
+        offset as u64,
+        to_delete_item.to_string().len() as u64 + 1,
+        "",
+    )
 }
 
 pub fn get_all() -> Result<Vec<Item>> {
@@ -102,6 +60,11 @@ pub fn get_item_by_id(id: u32) -> Result<Item> {
     }
 }
 
+/// It is not an efficient way to find the largest id for all records,
+/// but it works while ensuring the simplicity of the tutorial.
+/// In actual production projects,
+/// please use other efficient ways to generate unique identifiers,
+/// such as using `uuid`, etc.
 pub fn get_max_id() -> Result<u32> {
     let max_id = get_all()?.iter().map(|item| item.id()).reduce(u32::max);
 
@@ -122,6 +85,7 @@ impl Csv {
     fn new() -> Result<Self> {
         let filename = Csv::filename()?;
         let path = Path::new(&filename);
+
         if !path.exists() {
             let mut file = Csv::create(path)?;
             file.write_all(b"id,name,completed,deleted,createdAt,completedAt,deletedAt\n")?;
@@ -150,6 +114,7 @@ impl Csv {
         let csv = OpenOptions::new().read(true).write(true).open(path)?;
         Ok(csv)
     }
+
     fn filename() -> Result<String> {
         let home = env::var("HOME")?;
         let filename = home + "/" + CSV_FILE_NAME;
@@ -162,18 +127,37 @@ impl Csv {
         Ok(contents)
     }
 
+    /// Specify any position in the file to delete the specified byte,
+    /// and then insert any byte string
     pub fn splice(&mut self, offset: u64, delete_size: u64, write_content: &str) -> Result<()> {
         use std::io::SeekFrom;
         let file = &self.file;
+
+        // Create a buffered reader form csv file
         let mut reader = BufReader::new(file);
+
+        // Adjust the appropriate reading position
         reader.seek(SeekFrom::Start(offset + delete_size))?;
+
+        // Save the rest of the file,
+        // starting at the position after the last character that was deleted
         let mut rest_content = String::new();
         reader.read_to_string(&mut rest_content)?;
 
+        // The final to be write content is spliced
+        // by the `write_content` and the `rest_content`
         let write_content = write_content.to_owned() + &rest_content;
+
+        // Create a buffered writer from csv file
         let mut writer = BufWriter::new(file);
+
+        // Adjust the appropriate writing position
         writer.seek(SeekFrom::Start(offset))?;
+
+        // Insert `write_content` and overwrite old file content
         writer.write_all(write_content.as_bytes())?;
+
+        // Make sure there is no redundant old file content left
         file.set_len(offset + write_content.len() as u64)?;
 
         Ok(())
@@ -194,8 +178,7 @@ mod tests {
     #[test]
     fn title_line() -> Result<()> {
         let mut csv = Csv::new()?;
-        let mut content = String::new();
-        csv.file.read_to_string(&mut content)?;
+        let content = csv.content()?;
         let lines: Vec<&str> = content.lines().collect();
         assert!(!lines.is_empty());
         assert_eq!(
@@ -213,15 +196,15 @@ type Result<T> = std::result::Result<T, StorageError>;
 
 #[derive(Debug)]
 pub enum StorageError {
-    FileErr { source: FileHandleError },
-    ParseErr(ParseItemError),
+    FileHandle(FileHandleError),
+    ParseItem(ParseItemError),
     ItemNoExist(u32),
 }
 
 #[derive(Debug)]
 pub enum FileHandleError {
-    VarErr(VarError),
-    IoErr(std::io::Error),
+    EnvVar(VarError),
+    Io(std::io::Error),
 }
 
 impl Display for StorageError {
@@ -229,12 +212,12 @@ impl Display for StorageError {
         use FileHandleError::*;
         use StorageError::*;
         match &self {
-            FileErr { source } => match source {
-                VarErr(e) => write!(f, "rtd storage file handle env var error: {}", e),
-                IoErr(e) => write!(f, "rtd storage file handle io error: {}", e),
+            FileHandle(source) => match source {
+                EnvVar(e) => write!(f, "Rtd storage file handle env var error: {}", e),
+                Io(e) => write!(f, "Rtd storage file handle io error: {}", e),
             },
-            ParseErr(e) => write!(f, "{}", e),
-            ItemNoExist(id) => write!(f, "Todo item no exist: {}", id),
+            ParseItem(e) => write!(f, "Rtd storage parse todo error: {}", e),
+            ItemNoExist(id) => write!(f, "Rtd storage todo no exist: {}", id),
         }
     }
 }
@@ -244,11 +227,11 @@ impl Error for StorageError {
         use FileHandleError::*;
         use StorageError::*;
         match self {
-            FileErr { source } => match source {
-                VarErr(source) => Some(source),
-                IoErr(source) => Some(source),
+            FileHandle(source) => match source {
+                EnvVar(source) => Some(source),
+                Io(source) => Some(source),
             },
-            ParseErr(e) => Some(e),
+            ParseItem(e) => Some(e),
             ItemNoExist(_) => None,
         }
     }
@@ -256,22 +239,32 @@ impl Error for StorageError {
 
 impl From<VarError> for StorageError {
     fn from(value: VarError) -> Self {
-        Self::FileErr {
-            source: FileHandleError::VarErr(value),
-        }
+        Self::FileHandle(FileHandleError::EnvVar(value))
     }
 }
 
 impl From<std::io::Error> for StorageError {
     fn from(value: std::io::Error) -> Self {
-        Self::FileErr {
-            source: FileHandleError::IoErr(value),
-        }
+        Self::FileHandle(FileHandleError::Io(value))
     }
 }
 
 impl From<model::ParseItemError> for StorageError {
     fn from(value: model::ParseItemError) -> Self {
-        Self::ParseErr(value)
+        Self::ParseItem(value)
     }
+}
+
+fn get_offset_by_id(id: u32) -> Result<usize> {
+    let mut csv = Csv::new()?;
+    let content = csv.content()?;
+    let prev_lines = content.lines().take_while(|line| {
+        if let Ok(item) = line.parse::<Item>() {
+            item.id() != id
+        } else {
+            true
+        }
+    });
+    let offset: usize = prev_lines.map(|line| line.len() + 1).sum();
+    Ok(offset)
 }
