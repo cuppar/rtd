@@ -1,3 +1,5 @@
+use rtd::add_item;
+
 fn main() {
-    println!("Hello, world!");
+    add_item();
 }

@@ -121,7 +121,7 @@ impl Csv {
         Ok(filename)
     }
 
-    pub fn content(&mut self) -> Result<String> {
+    fn content(&mut self) -> Result<String> {
         let mut contents = String::new();
         self.file.read_to_string(&mut contents)?;
         Ok(contents)
@@ -129,7 +129,7 @@ impl Csv {
 
     /// Specify any position in the file to delete the specified byte,
     /// and then insert any byte string
-    pub fn splice(&mut self, offset: u64, delete_size: u64, write_content: &str) -> Result<()> {
+    fn splice(&mut self, offset: u64, delete_size: u64, write_content: &str) -> Result<()> {
         use std::io::SeekFrom;
         let file = &self.file;
 
