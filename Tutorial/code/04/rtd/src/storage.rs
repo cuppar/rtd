@@ -26,10 +26,6 @@ struct Csv {
 impl Csv {
     fn new() {}
 
-    fn create() {}
-
-    fn open() {}
-
     fn filename() {}
 
     fn content() {}
