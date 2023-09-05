@@ -164,14 +164,13 @@ impl Csv {
     }
 }
 
-#[allow(unused)]
+#[cfg(test)]
 mod tests {
     use super::*;
-    use std::io::Read;
 
     #[test]
     fn create_file() -> Result<()> {
-        let csv = Csv::new()?;
+        Csv::new()?;
         Ok(())
     }
 
