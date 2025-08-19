@@ -16,7 +16,6 @@ English | [中文](https://github.com/cuppar/rtd/blob/master/readme_zh.md#500%E8
 - [Prepare](#prepare)
 - [Install](#install)
 - [Usage](#usage)
-- [About author](#about-author)
 
 ---
 
@@ -189,7 +188,3 @@ rtd --clear
 ```
 
 ![rtd_clear](Tutorial/doc/img/readme/rtd_clear.png)
-
-## About author
-
-Cuppar He(He Zhiying), software development engineer, likes programming, technical writing, learning new things, especially computer science, worked for [SAP](https://www.sap.com/)([World Top 100](https://www.rankingthebrands.com/Brand-detail.aspx?brandID=22)) and [Alibaba Group](https://www.alibabagroup.com/)([World Top 100](https://www.rankingthebrands.com/Brand-detail.aspx?brandID=6245) & Chinese internet giant). I am currently in Gap Year, if you are looking for a software development engineer and can provide a high-quality offer(Both remote and on-site), please contact me `cuppar.hzy@gmail.com`.
